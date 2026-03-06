@@ -6,7 +6,7 @@
   <title>Chang (Sans) Xu | Personal Website</title>
   <meta
     name="description"
-    content="Personal website of Chang (Sans) Xu, featuring introduction, recent GitHub projects, and contact information."
+    content="Personal website of Chang (Sans) Xu, featuring introduction, recent GitHub projects, photography gallery, and contact information."
   >
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,10 +22,11 @@
     <div class="ambient ambient-right"></div>
 
     <header class="site-header">
-      <a class="brand" href="#top">Chang (Sans) Xu</a>
+      <a class="brand syntax-rainbow" href="#top">Chang (Sans) Xu</a>
       <nav class="site-nav">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
+        <a href="#photography">Photography</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
@@ -34,9 +35,9 @@
       <section class="hero section">
         <div class="hero-copy">
           <p class="eyebrow">PERSONAL WEBSITE</p>
-          <h1>向上生长，持续把想法做成真实的东西。</h1>
+          <h1 class="syntax-rainbow">向上生长，持续把想法做成真实的东西。</h1>
           <p class="hero-text">
-            我是 <span class="highlight">Chang (Sans) Xu</span>，一个向上的人。
+            我是 <span class="highlight syntax-rainbow-inline">Chang (Sans) Xu</span>，一个向上的人。
             我喜欢把灵感、技术和表达结合起来，持续学习，持续构建，也持续把新的想法变成能被看见、能被使用的作品。
           </p>
           <div class="hero-actions">
@@ -61,7 +62,7 @@
               <span class="portrait-ring portrait-ring-b"></span>
               <span class="portrait-ring portrait-ring-c"></span>
               <div class="portrait-avatar">
-                <span class="avatar-initials">CX</span>
+                <span class="avatar-initials syntax-rainbow-inline">CX</span>
               </div>
             </div>
           </div>
@@ -73,7 +74,7 @@
       <section id="about" class="section section-card about">
         <div class="section-heading">
           <p class="eyebrow">ABOUT</p>
-          <h2>我是谁，我在做什么</h2>
+          <h2 class="syntax-rainbow">我是谁，我在做什么</h2>
         </div>
         <div class="about-grid">
           <p class="about-lead">
@@ -82,15 +83,15 @@
           </p>
           <div class="about-details">
             <article>
-              <h3>我关注的方向</h3>
+              <h3 class="syntax-rainbow-inline">我关注的方向</h3>
               <p>前端、网页体验、创意表达，以及把个人想法变成真实作品的过程。</p>
             </article>
             <article>
-              <h3>我的状态</h3>
+              <h3 class="syntax-rainbow-inline">我的状态</h3>
               <p>持续学习，持续更新，也愿意把新的项目和新的尝试公开展示出来。</p>
             </article>
             <article>
-              <h3>我希望传达的感觉</h3>
+              <h3 class="syntax-rainbow-inline">我希望传达的感觉</h3>
               <p>向上、清晰、有执行力，同时保留一点个人风格和探索感。</p>
             </article>
           </div>
@@ -101,21 +102,60 @@
         <div class="section-heading section-heading-inline">
           <div>
             <p class="eyebrow">PROJECTS</p>
-            <h2>Recent GitHub updates</h2>
+            <h2 class="syntax-rainbow">Recent GitHub updates</h2>
           </div>
           <a class="inline-link" href="https://github.com/Sanssssssssssssssss" target="_blank" rel="noreferrer">View all on GitHub</a>
         </div>
-        <p class="projects-intro">
-          这里会直接读取我 GitHub 上最近更新的公开仓库。以后你更新 GitHub，这里也会跟着刷新。
-        </p>
         <div id="projects-grid" class="projects-grid"></div>
         <p id="projects-status" class="projects-status">Loading recent repositories...</p>
+      </section>
+
+      <section id="photography" class="section section-card photography">
+        <div class="section-heading">
+          <p class="eyebrow">PHOTOGRAPHY</p>
+          <h2 class="syntax-rainbow">Frames I keep coming back to</h2>
+        </div>
+        <p class="photography-intro">
+          摄影是我平时会反复回去练习的一件事。这里先放一个横向滚动的展览区，后面你可以直接把这些占位图替换成你自己的照片。
+        </p>
+        <div class="photo-marquee" aria-label="Photography gallery moving left">
+          <div class="photo-track">
+            <figure class="photo-card"><img src="assets/photos/photo-01.svg" alt="Abstract night street scene"><figcaption>Night Street</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-02.svg" alt="Abstract blue hour waterscape"><figcaption>Blue Hour</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-03.svg" alt="Abstract glass tower reflection"><figcaption>Glass Echo</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-04.svg" alt="Abstract subway platform composition"><figcaption>Metro Frame</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-05.svg" alt="Abstract rainy alley lights"><figcaption>Rain Signal</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-06.svg" alt="Abstract moonlit interior window"><figcaption>Late Window</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-01.svg" alt="Abstract night street scene duplicate"><figcaption>Night Street</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-02.svg" alt="Abstract blue hour waterscape duplicate"><figcaption>Blue Hour</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-03.svg" alt="Abstract glass tower reflection duplicate"><figcaption>Glass Echo</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-04.svg" alt="Abstract subway platform composition duplicate"><figcaption>Metro Frame</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-05.svg" alt="Abstract rainy alley lights duplicate"><figcaption>Rain Signal</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-06.svg" alt="Abstract moonlit interior window duplicate"><figcaption>Late Window</figcaption></figure>
+          </div>
+        </div>
+        <div class="photo-marquee photo-marquee-reverse" aria-label="Photography gallery moving right">
+          <div class="photo-track photo-track-reverse">
+            <figure class="photo-card"><img src="assets/photos/photo-06.svg" alt="Abstract moonlit interior window"><figcaption>Late Window</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-05.svg" alt="Abstract rainy alley lights"><figcaption>Rain Signal</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-04.svg" alt="Abstract subway platform composition"><figcaption>Metro Frame</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-03.svg" alt="Abstract glass tower reflection"><figcaption>Glass Echo</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-02.svg" alt="Abstract blue hour waterscape"><figcaption>Blue Hour</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-01.svg" alt="Abstract night street scene"><figcaption>Night Street</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-06.svg" alt="Abstract moonlit interior window duplicate"><figcaption>Late Window</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-05.svg" alt="Abstract rainy alley lights duplicate"><figcaption>Rain Signal</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-04.svg" alt="Abstract subway platform composition duplicate"><figcaption>Metro Frame</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-03.svg" alt="Abstract glass tower reflection duplicate"><figcaption>Glass Echo</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-02.svg" alt="Abstract blue hour waterscape duplicate"><figcaption>Blue Hour</figcaption></figure>
+            <figure class="photo-card"><img src="assets/photos/photo-01.svg" alt="Abstract night street scene duplicate"><figcaption>Night Street</figcaption></figure>
+          </div>
+        </div>
       </section>
 
       <section id="contact" class="section section-card contact">
         <div class="section-heading">
           <p class="eyebrow">CONTACT</p>
-          <h2>你可以在这里找到我</h2>
+          <h2 class="syntax-rainbow">你可以在这里找到我</h2>
         </div>
         <div class="contact-grid">
           <p class="contact-text">
