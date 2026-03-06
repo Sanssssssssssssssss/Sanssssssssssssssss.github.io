@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project World | Chang (Sans) Xu</title>
+  <meta
+    name="description"
+    content="Detailed project world page for repositories by Chang (Sans) Xu."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell world-shell detail-shell">
+    <div class="sky-glow sky-glow-a"></div>
+    <div class="sky-glow sky-glow-b"></div>
+    <div class="pixel-noise"></div>
+
+    <header class="top-hud pixel-panel detail-header">
+      <a class="world-title" href="index.html">&lt; Back To Overworld</a>
+      <div class="hud-meta">
+        <span id="detail-seed">SEED: loading...</span>
+        <span id="detail-lang">LANG: --</span>
+        <span id="detail-stars">STARS: --</span>
+      </div>
+    </header>
+
+    <main class="world-main detail-main">
+      <section class="pixel-panel section-panel detail-hero panel-deep">
+        <div class="section-header">
+          <p class="section-tag">[world_info]</p>
+          <h1 id="project-name">Loading project...</h1>
+        </div>
+        <p id="project-description" class="hero-text">Fetching repository metadata from GitHub.</p>
+        <div class="detail-action-row">
+          <a id="project-github-link" class="pixel-button pixel-button-primary" href="#" target="_blank" rel="noreferrer">Open GitHub Repo</a>
+          <a id="project-home-link" class="pixel-button pixel-button-secondary hidden-link" href="#" target="_blank" rel="noreferrer">Open Homepage</a>
+        </div>
+      </section>
+
+      <section class="detail-grid">
+        <article class="pixel-panel section-panel detail-card">
+          <div class="section-header compact-header">
+            <p class="section-tag">[stats]</p>
+            <h2>World Stats</h2>
+          </div>
+          <div id="project-stats" class="stat-list"></div>
+        </article>
+
+        <article class="pixel-panel section-panel detail-card">
+          <div class="section-header compact-header">
+            <p class="section-tag">[lore_book]</p>
+            <h2>README / Notes</h2>
+          </div>
+          <div id="project-readme" class="readme-box">Loading README...</div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Project world viewer for Chang (Sans) Xu.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

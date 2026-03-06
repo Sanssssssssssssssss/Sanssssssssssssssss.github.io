@@ -31,40 +31,56 @@ function createTag(label) {
   return `<span class="project-tag">${escapeHtml(label)}</span>`;
 }
 
+function createStatRow(label, value) {
+  return `
+    <div class="stat-row pixel-slot">
+      <span class="stat-key">${escapeHtml(label)}</span>
+      <strong class="stat-value">${escapeHtml(value)}</strong>
+    </div>
+  `;
+}
+
+function decodeBase64Utf8(base64Text) {
+  const binary = atob(base64Text.replace(/\n/g, ""));
+  const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
+
+  return new TextDecoder().decode(bytes);
+}
+
 function renderProjects(repos) {
   if (!projectsGrid || !projectsStatus) {
     return;
   }
 
   if (!repos.length) {
-    projectsStatus.textContent = "No public repositories available yet.";
+    projectsStatus.textContent = "No public project worlds available yet.";
     return;
   }
 
   const cards = repos.map((repo, index) => {
-    const description = repo.description || "No description yet. The repository itself is the latest source of truth.";
+    const description = repo.description || "No description yet. Open the world page to inspect the repository directly.";
     const language = repo.language || "Code";
     const updatedAt = formatDate(repo.pushed_at);
-    const stars = repo.stargazers_count;
+    const detailUrl = `project.html?repo=${encodeURIComponent(repo.name)}`;
 
     return `
-      <article class="project-card">
-        <p class="project-index">${String(index + 1).padStart(2, "0")}</p>
-        <a class="project-title-link" href="${repo.html_url}" target="_blank" rel="noreferrer">
+      <article class="project-card pixel-panel">
+        <p class="project-index">WORLD_${String(index + 1).padStart(2, "0")}</p>
+        <a class="project-title-link" href="${detailUrl}">
           <h3>${escapeHtml(repo.name)}</h3>
         </a>
         <p>${escapeHtml(description)}</p>
-        <p class="project-meta">Updated ${escapeHtml(updatedAt)} · ${stars} star${stars === 1 ? "" : "s"}</p>
+        <p class="project-meta">Last update ${escapeHtml(updatedAt)} · ${repo.stargazers_count} star${repo.stargazers_count === 1 ? "" : "s"}</p>
         <div class="project-tag-row">
           ${createTag(language)}
-          ${createTag("Public")}
+          ${createTag("Detail Page")}
         </div>
       </article>
     `;
   });
 
   projectsGrid.innerHTML = cards.join("");
-  projectsStatus.textContent = "Projects are synced from GitHub public repositories.";
+  projectsStatus.textContent = "Project worlds synced from GitHub and expanded into separate pages.";
 }
 
 async function loadProjects() {
@@ -84,7 +100,7 @@ async function loadProjects() {
       .filter((repo) => !repo.fork)
       .filter((repo) => !repo.archived)
       .filter((repo) => repo.name.toLowerCase() !== websiteRepo)
-      .slice(0, 3);
+      .slice(0, 6);
 
     renderProjects(repos);
   } catch (error) {
@@ -92,4 +108,76 @@ async function loadProjects() {
   }
 }
 
+async function loadProjectDetail() {
+  const nameNode = document.getElementById("project-name");
+
+  if (!nameNode) {
+    return;
+  }
+
+  const descriptionNode = document.getElementById("project-description");
+  const githubLinkNode = document.getElementById("project-github-link");
+  const homeLinkNode = document.getElementById("project-home-link");
+  const statsNode = document.getElementById("project-stats");
+  const readmeNode = document.getElementById("project-readme");
+  const seedNode = document.getElementById("detail-seed");
+  const languageNode = document.getElementById("detail-lang");
+  const starsNode = document.getElementById("detail-stars");
+  const params = new URLSearchParams(window.location.search);
+  const repoName = params.get("repo");
+
+  if (!repoName) {
+    nameNode.textContent = "Project not found";
+    descriptionNode.textContent = "No repository name was provided in the URL.";
+    readmeNode.textContent = "Add ?repo=repository-name to the URL to open a project world.";
+    return;
+  }
+
+  try {
+    const repoResponse = await fetch(`https://api.github.com/repos/${githubUser}/${encodeURIComponent(repoName)}`);
+
+    if (!repoResponse.ok) {
+      throw new Error(`GitHub API responded with ${repoResponse.status}`);
+    }
+
+    const repo = await repoResponse.json();
+    const readmeResponse = await fetch(`https://api.github.com/repos/${githubUser}/${encodeURIComponent(repoName)}/readme`);
+    const readmeData = readmeResponse.ok ? await readmeResponse.json() : null;
+
+    document.title = `${repo.name} | Project World`;
+    nameNode.textContent = repo.name;
+    descriptionNode.textContent = repo.description || "No description yet. The README and repository history are the current map of this project world.";
+    githubLinkNode.href = repo.html_url;
+
+    if (repo.homepage) {
+      homeLinkNode.href = repo.homepage;
+      homeLinkNode.classList.remove("hidden-link");
+    }
+
+    seedNode.textContent = `SEED: ${repo.id}`;
+    languageNode.textContent = `LANG: ${repo.language || "Unknown"}`;
+    starsNode.textContent = `STARS: ${repo.stargazers_count}`;
+
+    statsNode.innerHTML = [
+      createStatRow("Visibility", repo.private ? "Private" : "Public"),
+      createStatRow("Primary Language", repo.language || "Unknown"),
+      createStatRow("Updated", formatDate(repo.pushed_at)),
+      createStatRow("Open Issues", String(repo.open_issues_count)),
+      createStatRow("Watchers", String(repo.watchers_count)),
+      createStatRow("Default Branch", repo.default_branch)
+    ].join("");
+
+    if (readmeData && readmeData.content) {
+      readmeNode.textContent = decodeBase64Utf8(readmeData.content).slice(0, 6000);
+    } else {
+      readmeNode.textContent = "No README available for this repository yet.";
+    }
+  } catch (error) {
+    nameNode.textContent = repoName;
+    descriptionNode.textContent = "Unable to load this project world right now.";
+    readmeNode.textContent = "GitHub repository details could not be fetched.";
+  }
+}
+
 loadProjects();
+loadProjectDetail();
