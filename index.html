@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
     rel="stylesheet"
   >
   <link rel="stylesheet" href="styles.css">
@@ -20,78 +20,117 @@
   <div class="page-shell">
     <div class="ambient ambient-left"></div>
     <div class="ambient ambient-right"></div>
+    <div class="scanlines"></div>
 
-    <header class="site-header">
-      <a class="brand syntax-rainbow" href="#top">Chang (Sans) Xu</a>
+    <header class="site-header hud-panel">
+      <a class="brand code-brand" href="#top">
+        <span class="token-keyword">const</span>
+        <span class="token-function">portfolio</span>
+        <span class="token-operator">=</span>
+        <span class="token-string">"Chang (Sans) Xu"</span>
+      </a>
       <nav class="site-nav">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#photography">Photography</a>
-        <a href="#contact">Contact</a>
+        <a href="#about">Profile</a>
+        <a href="#projects">Missions</a>
+        <a href="#photography">Gallery</a>
+        <a href="#contact">Comms</a>
       </nav>
     </header>
 
     <main id="top">
       <section class="hero section">
         <div class="hero-copy">
-          <p class="eyebrow">PERSONAL WEBSITE</p>
-          <h1 class="syntax-rainbow">向上生长，持续把想法做成真实的东西。</h1>
-          <p class="hero-text">
-            我是 <span class="highlight syntax-rainbow-inline">Chang (Sans) Xu</span>，一个向上的人。
-            我喜欢把灵感、技术和表达结合起来，持续学习，持续构建，也持续把新的想法变成能被看见、能被使用的作品。
-          </p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#projects">查看 GitHub 项目</a>
-            <a class="button button-secondary" href="#contact">联系我</a>
-          </div>
-          <ul class="hero-facts">
-            <li>Always learning</li>
-            <li>Building in public</li>
-            <li>Open to collaboration</li>
-          </ul>
-        </div>
-
-        <div class="hero-visual" aria-label="Abstract portrait card">
-          <div class="portrait-frame">
-            <div class="portrait-grid"></div>
-            <div class="portrait-aurora portrait-aurora-a"></div>
-            <div class="portrait-aurora portrait-aurora-b"></div>
-            <div class="portrait-beam"></div>
-            <div class="portrait-core">
-              <span class="portrait-ring portrait-ring-a"></span>
-              <span class="portrait-ring portrait-ring-b"></span>
-              <span class="portrait-ring portrait-ring-c"></span>
-              <div class="portrait-avatar">
-                <span class="avatar-initials syntax-rainbow-inline">CX</span>
-              </div>
+          <div class="hero-terminal hud-panel">
+            <div class="window-bar">
+              <span class="window-dot dot-red"></span>
+              <span class="window-dot dot-yellow"></span>
+              <span class="window-dot dot-green"></span>
+              <span class="window-title">player_profile.ts</span>
+            </div>
+            <div class="code-block">
+              <p><span class="token-keyword">const</span> <span class="token-variable">player</span> <span class="token-operator">=</span> <span class="token-operator">{</span></p>
+              <p><span class="token-indent"></span><span class="token-property">name</span><span class="token-operator">:</span> <span class="token-string">"Chang (Sans) Xu"</span><span class="token-operator">,</span></p>
+              <p><span class="token-indent"></span><span class="token-property">mindset</span><span class="token-operator">:</span> <span class="token-string">"upward"</span><span class="token-operator">,</span></p>
+              <p><span class="token-indent"></span><span class="token-property">build</span><span class="token-operator">:</span> <span class="token-string">"code + ideas + expression"</span><span class="token-operator">,</span></p>
+              <p><span class="token-indent"></span><span class="token-property">status</span><span class="token-operator">:</span> <span class="token-string">"always learning"</span></p>
+              <p><span class="token-operator">};</span></p>
             </div>
           </div>
-          <div class="hero-note hero-note-top">Upward energy</div>
-          <div class="hero-note hero-note-bottom">Code x identity</div>
+
+          <p class="eyebrow"><span class="token-comment">// PLAYER ONE</span></p>
+          <h1>像写代码一样，持续升级自己的世界。</h1>
+          <p class="hero-text">
+            我是 <span class="token-string">Chang (Sans) Xu</span>，一个向上的人。
+            我喜欢把灵感、技术和表达组合成可执行的作品，让每一次更新都像通关一个新的阶段。
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#projects">Open Mission Log</a>
+            <a class="button button-secondary" href="#contact">Send Ping</a>
+          </div>
+          <div class="status-grid">
+            <div class="status-card hud-panel">
+              <span class="status-label">ROLE</span>
+              <strong class="token-type">Builder</strong>
+            </div>
+            <div class="status-card hud-panel">
+              <span class="status-label">XP</span>
+              <strong class="token-number">+∞ Learning</strong>
+            </div>
+            <div class="status-card hud-panel">
+              <span class="status-label">MODE</span>
+              <strong class="token-string">Creative Dev</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Player card">
+          <div class="player-card hud-panel">
+            <div class="window-bar player-card-bar">
+              <span class="window-dot dot-red"></span>
+              <span class="window-dot dot-yellow"></span>
+              <span class="window-dot dot-green"></span>
+              <span class="window-title">avatar.render()</span>
+            </div>
+            <div class="player-grid"></div>
+            <div class="player-glow player-glow-a"></div>
+            <div class="player-glow player-glow-b"></div>
+            <div class="player-frame">
+              <div class="avatar-shell">
+                <div class="avatar-core">
+                  <span class="avatar-initials token-function">CX</span>
+                </div>
+                <div class="avatar-orbit orbit-a"></div>
+                <div class="avatar-orbit orbit-b"></div>
+                <div class="avatar-orbit orbit-c"></div>
+              </div>
+            </div>
+            <div class="badge badge-top"><span class="token-type">LV.99</span> Vision</div>
+            <div class="badge badge-bottom"><span class="token-keyword">class</span> Explorer</div>
+          </div>
         </div>
       </section>
 
-      <section id="about" class="section section-card about">
+      <section id="about" class="section section-card hud-panel about">
         <div class="section-heading">
-          <p class="eyebrow">ABOUT</p>
-          <h2 class="syntax-rainbow">我是谁，我在做什么</h2>
+          <p class="eyebrow"><span class="token-comment">// PROFILE</span></p>
+          <h2><span class="token-keyword">export</span> <span class="token-type">const</span> <span class="token-function">aboutMe</span></h2>
         </div>
         <div class="about-grid">
           <p class="about-lead">
-            我在持续探索如何把代码、审美和表达结合在一起。
-            我希望自己一直向上，不只是学更多技术，也把想法做得更完整、更清楚、更有个人风格。
+            我在持续探索如何把代码、审美和表达融合成一个完整体验。
+            对我来说，成长不是抽象概念，而是一次次更新、迭代、优化之后留下来的真实成果。
           </p>
           <div class="about-details">
             <article>
-              <h3 class="syntax-rainbow-inline">我关注的方向</h3>
+              <h3><span class="token-property">focus</span>()</h3>
               <p>前端、网页体验、创意表达，以及把个人想法变成真实作品的过程。</p>
             </article>
             <article>
-              <h3 class="syntax-rainbow-inline">我的状态</h3>
+              <h3><span class="token-property">state</span>()</h3>
               <p>持续学习，持续更新，也愿意把新的项目和新的尝试公开展示出来。</p>
             </article>
             <article>
-              <h3 class="syntax-rainbow-inline">我希望传达的感觉</h3>
+              <h3><span class="token-property">signal</span>()</h3>
               <p>向上、清晰、有执行力，同时保留一点个人风格和探索感。</p>
             </article>
           </div>
@@ -101,22 +140,22 @@
       <section id="projects" class="section">
         <div class="section-heading section-heading-inline">
           <div>
-            <p class="eyebrow">PROJECTS</p>
-            <h2 class="syntax-rainbow">Recent GitHub updates</h2>
+            <p class="eyebrow"><span class="token-comment">// MISSION LOG</span></p>
+            <h2><span class="token-keyword">await</span> <span class="token-function">recentGithubUpdates</span>()</h2>
           </div>
-          <a class="inline-link" href="https://github.com/Sanssssssssssssssss" target="_blank" rel="noreferrer">View all on GitHub</a>
+          <a class="inline-link" href="https://github.com/Sanssssssssssssssss" target="_blank" rel="noreferrer">Open GitHub</a>
         </div>
         <div id="projects-grid" class="projects-grid"></div>
         <p id="projects-status" class="projects-status">Loading recent repositories...</p>
       </section>
 
-      <section id="photography" class="section section-card photography">
+      <section id="photography" class="section section-card hud-panel photography">
         <div class="section-heading">
-          <p class="eyebrow">PHOTOGRAPHY</p>
-          <h2 class="syntax-rainbow">Frames I keep coming back to</h2>
+          <p class="eyebrow"><span class="token-comment">// PHOTO MODE</span></p>
+          <h2><span class="token-keyword">render</span>(<span class="token-string">"frames_i_keep"</span>)</h2>
         </div>
         <p class="photography-intro">
-          摄影是我平时会反复回去练习的一件事。这里先放一个横向滚动的展览区，后面你可以直接把这些占位图替换成你自己的照片。
+          摄影是我平时会反复回去练习的一件事。这里是一个带点街机展厅味道的动态画廊，之后可以直接换成你自己的真实照片。
         </p>
         <div class="photo-marquee" aria-label="Photography gallery moving left">
           <div class="photo-track">
@@ -152,10 +191,10 @@
         </div>
       </section>
 
-      <section id="contact" class="section section-card contact">
+      <section id="contact" class="section section-card hud-panel contact">
         <div class="section-heading">
-          <p class="eyebrow">CONTACT</p>
-          <h2 class="syntax-rainbow">你可以在这里找到我</h2>
+          <p class="eyebrow"><span class="token-comment">// COMMS</span></p>
+          <h2><span class="token-keyword">send</span>(<span class="token-string">"hello"</span>)</h2>
         </div>
         <div class="contact-grid">
           <p class="contact-text">
