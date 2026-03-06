@@ -146,7 +146,7 @@ a {
 .world-title {
   display: inline-block;
   color: var(--gold);
-  font-size: clamp(0.7rem, 1.2vw, 1rem);
+  font-size: clamp(0.78rem, 1.3vw, 1.08rem);
   text-shadow: 2px 2px 0 #000;
 }
 
@@ -215,10 +215,19 @@ a {
 }
 
 .section-tag {
-  margin: 0 0 14px;
+  margin: 0 0 10px;
   color: var(--diamond);
   font-size: 0.56rem;
   line-height: 1.7;
+}
+
+.hero-name {
+  margin: 0 0 12px;
+  font-family: "Press Start 2P", cursive;
+  font-size: clamp(1.06rem, 3vw, 2.15rem);
+  line-height: 1.45;
+  color: var(--diamond);
+  text-shadow: 3px 3px 0 #000;
 }
 
 h1,
@@ -230,10 +239,10 @@ h3 {
 }
 
 h1 {
-  font-size: clamp(2rem, 6vw, 4.6rem);
-  line-height: 0.95;
+  font-size: clamp(1.22rem, 3.2vw, 2.2rem);
+  line-height: 1.18;
   color: var(--gold);
-  max-width: 11ch;
+  max-width: 18ch;
 }
 
 h2 {
@@ -557,7 +566,7 @@ h3 {
 .achievement-card {
   padding: 16px;
   display: grid;
-  grid-template-columns: 52px 1fr;
+  grid-template-columns: 72px 1fr;
   gap: 14px;
   align-items: start;
 }
@@ -576,26 +585,30 @@ h3 {
 }
 
 .achievement-icon {
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
   border: 4px solid #000;
-  box-shadow: inset 4px 4px 0 rgba(255,255,255,0.1), inset -4px -4px 0 rgba(0,0,0,0.24);
+  background-color: #20170f;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 80%;
+  box-shadow: inset 4px 4px 0 rgba(255,255,255,0.08), inset -4px -4px 0 rgba(0,0,0,0.28);
 }
 
 .emerald-icon {
-  background: linear-gradient(180deg, #5df4a8, var(--emerald));
+  background-image: url("assets/icons/oak-log.svg");
 }
 
 .diamond-icon {
-  background: linear-gradient(180deg, #a4f7ff, var(--diamond));
+  background-image: url("assets/icons/diamond-pickaxe.svg");
 }
 
 .redstone-icon {
-  background: linear-gradient(180deg, #ff8f86, var(--redstone));
+  background-image: url("assets/icons/redstone-dust.svg");
 }
 
 .portal-icon {
-  background: linear-gradient(180deg, #9e6ef8, #4a217d);
+  background-image: url("assets/icons/ender-eye.svg");
 }
 
 .projects-grid {
@@ -734,8 +747,10 @@ h3 {
 }
 
 .contact-links a {
-  padding: 14px;
-  font-size: 0.58rem;
+  padding: 16px 18px;
+  font-family: "VT323", monospace;
+  font-size: 1.34rem;
+  line-height: 1.15;
   background: linear-gradient(180deg, #322a1e, #201a12);
 }
 
@@ -905,3 +920,5 @@ h3 {
     flex-direction: column;
   }
 }
+
+
