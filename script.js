@@ -1,8 +1,13 @@
-﻿const yearNode = document.getElementById("current-year");
+const yearNode = document.getElementById("current-year");
 const projectsGrid = document.getElementById("projects-grid");
 const projectsStatus = document.getElementById("projects-status");
+const photoTrackPrimary = document.getElementById("photo-track-primary");
+const photoTrackSecondary = document.getElementById("photo-track-secondary");
+const galleryStatus = document.getElementById("gallery-status");
 const githubUser = "Sanssssssssssssssss";
 const websiteRepo = `${githubUser}.github.io`.toLowerCase();
+const photoManifestUrl = "assets/photos/manifest.json";
+const supportedPhotoExtensions = new Set([".png", ".jpg", ".jpeg", ".heic", ".svg"]);
 
 if (yearNode) {
   yearNode.textContent = new Date().getFullYear();
@@ -38,6 +43,101 @@ function createStatRow(label, value) {
       <strong class="stat-value">${escapeHtml(value)}</strong>
     </div>
   `;
+}
+
+function getFileExtension(path) {
+  const cleanPath = String(path || "").split("?")[0].split("#")[0];
+  const lastDotIndex = cleanPath.lastIndexOf(".");
+
+  return lastDotIndex === -1 ? "" : cleanPath.slice(lastDotIndex).toLowerCase();
+}
+
+function prettifyPhotoLabel(src) {
+  const fileName = String(src || "").split("/").pop() || "Photo";
+  const stem = fileName.replace(/\.[^.]+$/, "");
+
+  return stem
+    .replace(/[-_]+/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+function createPhotoCard(photo, duplicateLabel = "") {
+  const alt = photo.alt || prettifyPhotoLabel(photo.src);
+  const caption = photo.caption || prettifyPhotoLabel(photo.src);
+  const duplicateSuffix = duplicateLabel ? ` ${duplicateLabel}` : "";
+
+  return `
+    <figure class="photo-card pixel-slot" data-photo-ext="${escapeHtml(getFileExtension(photo.src))}">
+      <img src="${escapeHtml(photo.src)}" alt="${escapeHtml(`${alt}${duplicateSuffix}`)}" loading="lazy">
+      <figcaption>${escapeHtml(caption)}</figcaption>
+    </figure>
+  `;
+}
+
+function setGalleryStatus(message) {
+  if (galleryStatus) {
+    galleryStatus.textContent = message;
+  }
+}
+
+function hydratePhotoTrack(trackNode) {
+  if (!trackNode) {
+    return;
+  }
+
+  trackNode.querySelectorAll("img").forEach((imageNode) => {
+    imageNode.addEventListener("error", () => {
+      const cardNode = imageNode.closest(".photo-card");
+      const extension = cardNode?.dataset.photoExt || "";
+
+      if (cardNode) {
+        cardNode.classList.add("photo-card-error");
+        cardNode.setAttribute("hidden", "");
+      }
+
+      if (extension === ".heic") {
+        setGalleryStatus("Gallery loaded, but this browser could not decode one or more .heic images. PNG and JPG/JPEG remain supported.");
+      }
+    });
+  });
+}
+
+function renderPhotoGallery(photos) {
+  if (!photoTrackPrimary || !photoTrackSecondary || !galleryStatus) {
+    return;
+  }
+
+  const validPhotos = photos.filter((photo) => {
+    if (!photo || !photo.src) {
+      return false;
+    }
+
+    return supportedPhotoExtensions.has(getFileExtension(photo.src));
+  });
+
+  if (!validPhotos.length) {
+    photoTrackPrimary.innerHTML = "";
+    photoTrackSecondary.innerHTML = "";
+    setGalleryStatus("No supported gallery files found. Add .png, .jpg, .jpeg, .heic, or .svg images and regenerate the manifest.");
+    return;
+  }
+
+  const duplicatedPrimary = [...validPhotos, ...validPhotos];
+  const reversedPhotos = validPhotos.slice().reverse();
+  const duplicatedSecondary = [...reversedPhotos, ...reversedPhotos];
+
+  photoTrackPrimary.innerHTML = duplicatedPrimary
+    .map((photo, index) => createPhotoCard(photo, index >= validPhotos.length ? "duplicate" : ""))
+    .join("");
+
+  photoTrackSecondary.innerHTML = duplicatedSecondary
+    .map((photo, index) => createPhotoCard(photo, index >= reversedPhotos.length ? "duplicate" : ""))
+    .join("");
+
+  hydratePhotoTrack(photoTrackPrimary);
+  hydratePhotoTrack(photoTrackSecondary);
+
+  setGalleryStatus(`Gallery manifest loaded: ${validPhotos.length} photo asset${validPhotos.length === 1 ? "" : "s"} detected.`);
 }
 
 function decodeBase64Utf8(base64Text) {
@@ -105,6 +205,25 @@ async function loadProjects() {
     renderProjects(repos);
   } catch (error) {
     projectsStatus.textContent = "Unable to load GitHub repositories right now.";
+  }
+}
+
+async function loadPhotoGallery() {
+  if (!photoTrackPrimary || !photoTrackSecondary || !galleryStatus) {
+    return;
+  }
+
+  try {
+    const response = await fetch(photoManifestUrl, { cache: "no-store" });
+
+    if (!response.ok) {
+      throw new Error(`Gallery manifest responded with ${response.status}`);
+    }
+
+    const data = await response.json();
+    renderPhotoGallery(Array.isArray(data) ? data : []);
+  } catch (error) {
+    setGalleryStatus("Unable to load the gallery manifest right now.");
   }
 }
 
@@ -180,4 +299,5 @@ async function loadProjectDetail() {
 }
 
 loadProjects();
+loadPhotoGallery();
 loadProjectDetail();
