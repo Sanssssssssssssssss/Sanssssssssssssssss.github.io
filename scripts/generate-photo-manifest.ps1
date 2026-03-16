@@ -19,6 +19,19 @@ function Convert-ToTitle {
   return $title
 }
 
+function Get-PhotoFallbackTitle {
+  param(
+    [string]$BaseName,
+    [int]$Index
+  )
+
+  if ($BaseName -match "^[0-9a-f]{16,}$") {
+    return "Photo {0:D2}" -f ($Index + 1)
+  }
+
+  return Convert-ToTitle -BaseName $BaseName
+}
+
 if (Test-Path $manifestPath) {
   $existingEntries = Get-Content $manifestPath -Raw | ConvertFrom-Json
 
@@ -34,9 +47,10 @@ $photos = Get-ChildItem -Path $photoDir -File |
   Where-Object { $_.Name -ne "manifest.json" } |
   Sort-Object Name
 
-$manifest = foreach ($photo in $photos) {
+$manifest = for ($index = 0; $index -lt $photos.Count; $index++) {
+  $photo = $photos[$index]
   $relativePath = "assets/photos/$($photo.Name)"
-  $title = Convert-ToTitle -BaseName $photo.BaseName
+  $title = Get-PhotoFallbackTitle -BaseName $photo.BaseName -Index $index
   $existingEntry = $existingEntriesBySrc[$relativePath]
 
   [PSCustomObject]@{

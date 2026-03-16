@@ -1,32 +1,32 @@
 ﻿[
     {
-        "src":  "assets/photos/photo-01.svg",
-        "alt":  "Abstract night street scene",
-        "caption":  "Night Street"
+        "src":  "assets/photos/6937aa41b3262f4e15c3f435ddcab529.jpg",
+        "alt":  "Photo 01",
+        "caption":  "Photo 01"
     },
     {
-        "src":  "assets/photos/photo-02.svg",
-        "alt":  "Abstract blue hour waterscape",
-        "caption":  "Blue Hour"
+        "src":  "assets/photos/750137c4ecf54dfa6310457ded52479e.jpg",
+        "alt":  "Photo 02",
+        "caption":  "Photo 02"
     },
     {
-        "src":  "assets/photos/photo-03.svg",
-        "alt":  "Abstract glass tower reflection",
-        "caption":  "Glass Echo"
+        "src":  "assets/photos/78be6d273ec0713ae25fd4395115a7af.jpg",
+        "alt":  "Photo 03",
+        "caption":  "Photo 03"
     },
     {
-        "src":  "assets/photos/photo-04.svg",
-        "alt":  "Abstract subway platform composition",
-        "caption":  "Metro Frame"
+        "src":  "assets/photos/9741363fe9ba2aab4bcae4da0d3ac072.jpg",
+        "alt":  "Photo 04",
+        "caption":  "Photo 04"
     },
     {
-        "src":  "assets/photos/photo-05.svg",
-        "alt":  "Abstract rainy alley lights",
-        "caption":  "Rain Signal"
+        "src":  "assets/photos/97c0937f11c38d26f9a3ab037c656813.jpg",
+        "alt":  "Photo 05",
+        "caption":  "Photo 05"
     },
     {
-        "src":  "assets/photos/photo-06.svg",
-        "alt":  "Abstract moonlit interior window",
-        "caption":  "Late Window"
+        "src":  "assets/photos/f648681831c8a2456d83bce08916465b.jpg",
+        "alt":  "Photo 06",
+        "caption":  "Photo 06"
     }
 ]
