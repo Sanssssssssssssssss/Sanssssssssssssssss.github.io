@@ -644,6 +644,12 @@ h3 {
 
 .project-title-link h3 {
   color: var(--gold);
+  font-size: clamp(1.18rem, 1.6vw, 1.45rem);
+  line-height: 1.35;
+}
+
+.project-description {
+  min-height: 8.2rem;
 }
 
 .project-meta {
@@ -655,6 +661,8 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .project-tag {
@@ -662,6 +670,25 @@ h3 {
   padding: 8px 10px;
   border: 3px solid #000;
   background: linear-gradient(180deg, #364c2c, #293720);
+}
+
+.project-detail-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 10px;
+  border: 3px solid #000;
+  background: linear-gradient(180deg, #7ac54f, #5d8f34);
+  color: #111;
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.5rem;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.project-detail-button:hover {
+  color: #111;
+  filter: brightness(1.08);
 }
 
 .projects-status {

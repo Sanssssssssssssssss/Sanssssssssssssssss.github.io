@@ -44,6 +44,37 @@ function createStatRow(label, value) {
   `;
 }
 
+function truncateDescriptionForCard(text, maxLength = 150) {
+  const normalizedText = String(text || "").replace(/\s+/g, " ").trim();
+
+  if (!normalizedText || normalizedText.length <= maxLength) {
+    return normalizedText;
+  }
+
+  const minimumBoundary = Math.floor(maxLength * 0.55);
+  const searchWindow = normalizedText.slice(0, maxLength + 1);
+  const sentenceBoundary = Math.max(
+    searchWindow.lastIndexOf("。"),
+    searchWindow.lastIndexOf("."),
+    searchWindow.lastIndexOf("!"),
+    searchWindow.lastIndexOf("?"),
+    searchWindow.lastIndexOf("！"),
+    searchWindow.lastIndexOf("？")
+  );
+
+  if (sentenceBoundary >= minimumBoundary) {
+    return normalizedText.slice(0, sentenceBoundary + 1).trim();
+  }
+
+  const nextBoundaryMatch = normalizedText.slice(maxLength).match(/[。.!?！？]/);
+
+  if (nextBoundaryMatch && typeof nextBoundaryMatch.index === "number" && nextBoundaryMatch.index <= 40) {
+    return normalizedText.slice(0, maxLength + nextBoundaryMatch.index + 1).trim();
+  }
+
+  return `${normalizedText.slice(0, maxLength).trimEnd()}...`;
+}
+
 function getFileExtension(path) {
   const cleanPath = String(path || "").split("?")[0].split("#")[0];
   const lastDotIndex = cleanPath.lastIndexOf(".");
@@ -143,7 +174,9 @@ function renderProjects(repos) {
   }
 
   const cards = repos.map((repo, index) => {
-    const description = repo.description || "No description yet. Open the world page to inspect the repository directly.";
+    const description = truncateDescriptionForCard(
+      repo.description || "No description yet. Open the world page to inspect the repository directly."
+    );
     const language = repo.language || "Code";
     const updatedAt = formatDate(repo.pushed_at);
     const detailUrl = `project.html?repo=${encodeURIComponent(repo.name)}`;
@@ -154,11 +187,11 @@ function renderProjects(repos) {
         <a class="project-title-link" href="${detailUrl}">
           <h3>${escapeHtml(repo.name)}</h3>
         </a>
-        <p>${escapeHtml(description)}</p>
+        <p class="project-description">${escapeHtml(description)}</p>
         <p class="project-meta">${repo.stargazers_count} star${repo.stargazers_count === 1 ? "" : "s"} | Last update ${escapeHtml(updatedAt)}</p>
         <div class="project-tag-row">
           ${createTag(language)}
-          ${createTag("Detail Page")}
+          <a class="project-detail-button" href="${detailUrl}">Detail Page</a>
         </div>
       </article>
     `;
