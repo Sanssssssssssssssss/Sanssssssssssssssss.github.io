@@ -77,3 +77,13 @@
 - Impact:
   - HEIC files are included in the manifest and accepted by the gallery pipeline.
   - Browsers that cannot decode HEIC should fail gracefully without breaking the gallery.
+
+### 2026-03-16 - Order GitHub project cards by star count instead of recency
+
+- Status: Accepted
+- Reason:
+  - The user wants the project showcase to emphasize the strongest public repositories rather than the most recently updated ones.
+  - The GitHub user repositories API does not provide star sorting for this endpoint, so client-side sorting is the simplest compatible option.
+- Impact:
+  - The homepage now fetches a larger repo set and sorts eligible repositories by `stargazers_count` descending.
+  - Recent update time is retained only as a tie-breaker and display field.

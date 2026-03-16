@@ -3,7 +3,6 @@ const projectsGrid = document.getElementById("projects-grid");
 const projectsStatus = document.getElementById("projects-status");
 const photoTrackPrimary = document.getElementById("photo-track-primary");
 const photoTrackSecondary = document.getElementById("photo-track-secondary");
-const galleryStatus = document.getElementById("gallery-status");
 const githubUser = "Sanssssssssssssssss";
 const websiteRepo = `${githubUser}.github.io`.toLowerCase();
 const photoManifestUrl = "assets/photos/manifest.json";
@@ -74,12 +73,6 @@ function createPhotoCard(photo, duplicateLabel = "") {
   `;
 }
 
-function setGalleryStatus(message) {
-  if (galleryStatus) {
-    galleryStatus.textContent = message;
-  }
-}
-
 function hydratePhotoTrack(trackNode) {
   if (!trackNode) {
     return;
@@ -88,22 +81,17 @@ function hydratePhotoTrack(trackNode) {
   trackNode.querySelectorAll("img").forEach((imageNode) => {
     imageNode.addEventListener("error", () => {
       const cardNode = imageNode.closest(".photo-card");
-      const extension = cardNode?.dataset.photoExt || "";
 
       if (cardNode) {
         cardNode.classList.add("photo-card-error");
         cardNode.setAttribute("hidden", "");
-      }
-
-      if (extension === ".heic") {
-        setGalleryStatus("Gallery loaded, but this browser could not decode one or more .heic images. PNG and JPG/JPEG remain supported.");
       }
     });
   });
 }
 
 function renderPhotoGallery(photos) {
-  if (!photoTrackPrimary || !photoTrackSecondary || !galleryStatus) {
+  if (!photoTrackPrimary || !photoTrackSecondary) {
     return;
   }
 
@@ -118,7 +106,6 @@ function renderPhotoGallery(photos) {
   if (!validPhotos.length) {
     photoTrackPrimary.innerHTML = "";
     photoTrackSecondary.innerHTML = "";
-    setGalleryStatus("No supported gallery files found. Add .png, .jpg, .jpeg, .heic, or .svg images and regenerate the manifest.");
     return;
   }
 
@@ -136,8 +123,6 @@ function renderPhotoGallery(photos) {
 
   hydratePhotoTrack(photoTrackPrimary);
   hydratePhotoTrack(photoTrackSecondary);
-
-  setGalleryStatus(`Gallery manifest loaded: ${validPhotos.length} photo asset${validPhotos.length === 1 ? "" : "s"} detected.`);
 }
 
 function decodeBase64Utf8(base64Text) {
@@ -170,7 +155,7 @@ function renderProjects(repos) {
           <h3>${escapeHtml(repo.name)}</h3>
         </a>
         <p>${escapeHtml(description)}</p>
-        <p class="project-meta">Last update ${escapeHtml(updatedAt)} · ${repo.stargazers_count} star${repo.stargazers_count === 1 ? "" : "s"}</p>
+        <p class="project-meta">${repo.stargazers_count} star${repo.stargazers_count === 1 ? "" : "s"} | Last update ${escapeHtml(updatedAt)}</p>
         <div class="project-tag-row">
           ${createTag(language)}
           ${createTag("Detail Page")}
@@ -180,7 +165,7 @@ function renderProjects(repos) {
   });
 
   projectsGrid.innerHTML = cards.join("");
-  projectsStatus.textContent = "Project worlds synced from GitHub and expanded into separate pages.";
+  projectsStatus.textContent = "Project worlds sorted by stars from GitHub.";
 }
 
 async function loadProjects() {
@@ -189,7 +174,7 @@ async function loadProjects() {
   }
 
   try {
-    const response = await fetch(`https://api.github.com/users/${githubUser}/repos?sort=updated&per_page=12`);
+    const response = await fetch(`https://api.github.com/users/${githubUser}/repos?per_page=100`);
 
     if (!response.ok) {
       throw new Error(`GitHub API responded with ${response.status}`);
@@ -200,6 +185,13 @@ async function loadProjects() {
       .filter((repo) => !repo.fork)
       .filter((repo) => !repo.archived)
       .filter((repo) => repo.name.toLowerCase() !== websiteRepo)
+      .sort((leftRepo, rightRepo) => {
+        if (rightRepo.stargazers_count !== leftRepo.stargazers_count) {
+          return rightRepo.stargazers_count - leftRepo.stargazers_count;
+        }
+
+        return new Date(rightRepo.pushed_at).getTime() - new Date(leftRepo.pushed_at).getTime();
+      })
       .slice(0, 6);
 
     renderProjects(repos);
@@ -209,7 +201,7 @@ async function loadProjects() {
 }
 
 async function loadPhotoGallery() {
-  if (!photoTrackPrimary || !photoTrackSecondary || !galleryStatus) {
+  if (!photoTrackPrimary || !photoTrackSecondary) {
     return;
   }
 
@@ -222,9 +214,7 @@ async function loadPhotoGallery() {
 
     const data = await response.json();
     renderPhotoGallery(Array.isArray(data) ? data : []);
-  } catch (error) {
-    setGalleryStatus("Unable to load the gallery manifest right now.");
-  }
+  } catch (error) {}
 }
 
 async function loadProjectDetail() {
