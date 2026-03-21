@@ -1,0 +1,40 @@
+name: Deploy To Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main
+      - codex/cloudflare-static
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare static deploy directory
+        run: |
+          rm -rf dist-cloudflare
+          mkdir -p dist-cloudflare
+          cp index.html project.html styles.css script.js dist-cloudflare/
+          cp -R assets dist-cloudflare/
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: >-
+            pages deploy dist-cloudflare
+            --project-name=chang-xu-portfolio
+            --branch=codex/cloudflare-static
+            --commit-dirty=true
+            --commit-hash=${{ github.sha }}
+            --commit-message="${{ github.event.head_commit.message || github.event.repository.updated_at }}"

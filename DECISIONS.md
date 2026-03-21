@@ -97,3 +97,13 @@
 - Impact:
   - A `codex/`-prefixed branch should be created and pushed with the current static site state.
   - Cloudflare deployment can point at the repository root with no build step unless later requirements change.
+
+### 2026-03-21 - Use GitHub Actions to auto-deploy the Direct Upload Pages project
+
+- Status: Accepted
+- Reason:
+  - The current Cloudflare Pages project was created with Direct Upload, and Cloudflare documents that Direct Upload projects cannot be switched to Git integration later.
+  - The user wants Cloudflare to update automatically after GitHub pushes.
+- Impact:
+  - Automatic deployment is implemented via GitHub Actions plus Wrangler.
+  - The workflow prepares a clean static upload directory and deploys it to the existing `chang-xu-portfolio` Pages project.
