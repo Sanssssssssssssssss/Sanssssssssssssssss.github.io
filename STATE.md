@@ -2,7 +2,7 @@
 
 ## Current Status
 
-Project initialization is partially complete. The repository contains a working static personal website prototype, project memory documents are in place, the repository README exposes the verified live GitHub Pages URL, and the homepage photo gallery now renders from a static manifest.
+Project initialization is partially complete. The repository contains a working static personal website prototype, project memory documents are in place, the repository README exposes the verified live GitHub Pages URL, the homepage photo gallery renders from a static manifest, and deployment is expanding beyond GitHub Pages to a dedicated Cloudflare branch flow.
 
 ## Current Focus
 
@@ -16,6 +16,7 @@ Project initialization is partially complete. The repository contains a working 
 - Audit the current pages against the requirements baseline
 - Mark placeholders, content gaps, broken links, and interaction issues
 - Convert the audit into a prioritized implementation pass for the first stable version
+- Wire the pushed static branch into Cloudflare Pages configuration
 
 ## Risks
 

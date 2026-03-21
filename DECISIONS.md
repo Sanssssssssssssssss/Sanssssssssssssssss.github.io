@@ -87,3 +87,13 @@
 - Impact:
   - The homepage now fetches a larger repo set and sorts eligible repositories by `stargazers_count` descending.
   - Recent update time is retained only as a tie-breaker and display field.
+
+### 2026-03-21 - Prepare a dedicated branch for Cloudflare static deployment
+
+- Status: Accepted
+- Reason:
+  - The user wants the same static site to be deployable beyond GitHub Pages.
+  - Cloudflare Pages can track a dedicated Git branch without requiring a codebase restructure for this project.
+- Impact:
+  - A `codex/`-prefixed branch should be created and pushed with the current static site state.
+  - Cloudflare deployment can point at the repository root with no build step unless later requirements change.
