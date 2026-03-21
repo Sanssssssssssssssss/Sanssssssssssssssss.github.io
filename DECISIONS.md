@@ -87,3 +87,23 @@
 - Impact:
   - The homepage now fetches a larger repo set and sorts eligible repositories by `stargazers_count` descending.
   - Recent update time is retained only as a tie-breaker and display field.
+
+### 2026-03-21 - Prepare a dedicated branch for Cloudflare static deployment
+
+- Status: Accepted
+- Reason:
+  - The user wants the same static site to be deployable beyond GitHub Pages.
+  - Cloudflare Pages can track a dedicated Git branch without requiring a codebase restructure for this project.
+- Impact:
+  - A `codex/`-prefixed branch should be created and pushed with the current static site state.
+  - Cloudflare deployment can point at the repository root with no build step unless later requirements change.
+
+### 2026-03-21 - Use GitHub Actions to auto-deploy the Direct Upload Pages project
+
+- Status: Accepted
+- Reason:
+  - The current Cloudflare Pages project was created with Direct Upload, and Cloudflare documents that Direct Upload projects cannot be switched to Git integration later.
+  - The user wants Cloudflare to update automatically after GitHub pushes.
+- Impact:
+  - Automatic deployment is implemented via GitHub Actions plus Wrangler.
+  - The workflow prepares a clean static upload directory and deploys it to the existing `chang-xu-portfolio` Pages project.

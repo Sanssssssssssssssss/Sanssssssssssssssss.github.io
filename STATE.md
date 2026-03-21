@@ -10,12 +10,15 @@ Project initialization is partially complete. The repository contains a working 
 - Review the current implementation against documented requirements
 - Replace placeholder content and polish repository-facing documentation
 - Stabilize the gallery workflow for real image assets
+- Automate Cloudflare Pages deployment from GitHub pushes
 
 ## Next Step
 
 - Audit the current pages against the requirements baseline
 - Mark placeholders, content gaps, broken links, and interaction issues
 - Convert the audit into a prioritized implementation pass for the first stable version
+- Wire the pushed static branch into Cloudflare Pages configuration
+- Add required GitHub repository secrets so the Cloudflare deployment workflow can run unattended
 
 ## Risks
 
