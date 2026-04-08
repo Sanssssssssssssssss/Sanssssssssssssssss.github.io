@@ -116,6 +116,10 @@ if (yearNode) {
   yearNode.textContent = new Date().getFullYear();
 }
 
+if (typeof window !== "undefined" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  document.body.classList.add("motion-enabled");
+}
+
 function escapeHtml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -373,6 +377,7 @@ function renderProjects(repos) {
 
   projectsGrid.innerHTML = cards.join("");
   projectsStatus.textContent = "按公开信号和最近更新排序。";
+  initializeRevealMotion();
 }
 
 function enableCardNavigation() {
@@ -400,6 +405,60 @@ function enableCardNavigation() {
       window.location.href = card.dataset.detailUrl;
     }
   });
+}
+
+function prepareRevealGrid(gridNode) {
+  if (!gridNode) {
+    return [];
+  }
+
+  const cards = Array.from(gridNode.children).filter((node) => {
+    return node.classList?.contains("featured-card") || node.classList?.contains("project-card");
+  });
+
+  cards.forEach((card, index) => {
+    card.classList.add("reveal-card");
+    card.style.setProperty("--reveal-delay", `${Math.min(index, 7) * 70}ms`);
+  });
+
+  return cards;
+}
+
+function initializeRevealMotion() {
+  if (!document.body.classList.contains("motion-enabled")) {
+    return;
+  }
+
+  const cards = [
+    ...prepareRevealGrid(document.querySelector(".featured-grid")),
+    ...prepareRevealGrid(document.getElementById("projects-grid"))
+  ];
+
+  if (!cards.length) {
+    return;
+  }
+
+  if (!("IntersectionObserver" in window)) {
+    cards.forEach((card) => card.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.18,
+      rootMargin: "0px 0px -8% 0px"
+    }
+  );
+
+  cards.forEach((card) => observer.observe(card));
 }
 
 async function loadProjects() {
@@ -607,3 +666,4 @@ loadProjects();
 loadFeaturedProjects();
 loadPhotoGallery();
 loadProjectDetail();
+initializeRevealMotion();
