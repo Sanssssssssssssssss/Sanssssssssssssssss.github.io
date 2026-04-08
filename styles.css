@@ -793,6 +793,18 @@ h3 {
   font-size: 0.98rem;
 }
 
+.contact-static {
+  display: flex;
+  align-items: center;
+  min-height: 3.2rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: rgba(51, 50, 42, 0.7);
+  font-size: 0.98rem;
+  color: var(--text);
+}
+
 .site-footer {
   width: min(calc(100% - 2rem), var(--content-width));
   margin: 0 auto;
