@@ -12,6 +12,7 @@ const featuredProjectCopy = {
     repo: "KeySight-Oscilloscope-Automation-Software",
     summary:
       "面向 Keysight 示波器自动化的 Windows 桌面客户端，把设备连接、波形采集、预设管理、脚本批处理和结果导出放进同一个 Qt 工作流。",
+    imageUrl: "https://raw.githubusercontent.com/Sanssssssssssssssss/KeySight-Oscilloscope-Automation-Software/main/docs/images/ui-home.png",
     placeholderLabel: "QT",
     placeholderHint: "桌面自动化"
   },
@@ -19,6 +20,7 @@ const featuredProjectCopy = {
     repo: "UDP-High-Speed-Image-Receiver-Display-System",
     summary:
       "一个高性能 UDP 图像接收与显示系统，可处理每秒 24,000 个、每包 1300 字节的数据包，并完成实时重建与显示。",
+    imageUrl: "https://github.com/user-attachments/assets/b0fc7950-9bdb-48c0-bc12-6f7179a92130",
     placeholderLabel: "UDP",
     placeholderHint: "24,000 packets/s"
   },
@@ -39,6 +41,75 @@ const featuredProjectCopy = {
 };
 const featuredRepos = new Set(
   Object.values(featuredProjectCopy).map((entry) => entry.repo.toLowerCase())
+);
+const fallbackProjects = [
+  {
+    name: "ecg_sqi_fusion",
+    description: "Project ecg_sqi_fusion for PhysioNet Challenge 2011.",
+    language: "Python",
+    html_url: "https://github.com/Sanssssssssssssssss/ecg_sqi_fusion",
+    stargazers_count: 2,
+    pushed_at: "2026-03-28T00:00:00Z"
+  },
+  {
+    name: "C2_Coursework",
+    description: "Temporal repository for C2 high performance computing coursework.",
+    language: "C++",
+    html_url: "https://github.com/Sanssssssssssssssss/C2_Coursework",
+    stargazers_count: 1,
+    pushed_at: "2026-04-01T00:00:00Z"
+  },
+  {
+    name: "RL_For_Auto_Multi_Game_Agent",
+    description: "RL experiments for automated multi-game agents.",
+    language: "Mixed",
+    html_url: "https://github.com/Sanssssssssssssssss/RL_For_Auto_Multi_Game_Agent",
+    stargazers_count: 1,
+    pushed_at: "2025-10-29T00:00:00Z"
+  },
+  {
+    name: "endoscopic-image-acquisition-system",
+    description: "FPGA-based low-latency endoscopic image acquisition system.",
+    language: "Mixed",
+    html_url: "https://github.com/Sanssssssssssssssss/endoscopic-image-acquisition-system",
+    stargazers_count: 1,
+    pushed_at: "2025-02-15T00:00:00Z"
+  },
+  {
+    name: "Software_for_Gemini_Ultra",
+    description: "Application software experiments and tooling around Gemini Ultra.",
+    language: "Python",
+    html_url: "https://github.com/Sanssssssssssssssss/Software_for_Gemini_Ultra",
+    stargazers_count: 0,
+    pushed_at: "2025-01-20T00:00:00Z"
+  },
+  {
+    name: "cc-mini-kimi",
+    description: "Lightweight AI tooling experiments.",
+    language: "Python",
+    html_url: "https://github.com/Sanssssssssssssssss/cc-mini-kimi",
+    stargazers_count: 0,
+    pushed_at: "2025-01-18T00:00:00Z"
+  },
+  {
+    name: "langgraph-personal-agent",
+    description: "Personal agent workflows built with LangGraph.",
+    language: "Python",
+    html_url: "https://github.com/Sanssssssssssssssss/langgraph-personal-agent",
+    stargazers_count: 0,
+    pushed_at: "2025-01-12T00:00:00Z"
+  },
+  {
+    name: "Yolov8n-for-paperseed",
+    description: "YOLOv8n experiments for paper seed detection tasks.",
+    language: "Python",
+    html_url: "https://github.com/Sanssssssssssssssss/Yolov8n-for-paperseed",
+    stargazers_count: 0,
+    pushed_at: "2025-01-08T00:00:00Z"
+  }
+];
+const fallbackProjectMap = Object.fromEntries(
+  fallbackProjects.map((project) => [project.name.toLowerCase(), project])
 );
 
 if (yearNode) {
@@ -362,7 +433,8 @@ async function loadProjects() {
 
     renderProjects(repos);
   } catch (error) {
-    projectsStatus.textContent = "暂时无法载入项目。";
+    renderProjects(fallbackProjects);
+    projectsStatus.textContent = "正在显示缓存的公开项目。";
   }
 }
 
@@ -383,20 +455,22 @@ async function loadFeaturedProjects() {
         }
 
         const repo = await repoResponse.json();
-        let imageUrl = "";
+        let imageUrl = entry.imageUrl || "";
 
-        try {
-          const readmeResponse = await fetch(
-            `https://api.github.com/repos/${githubUser}/${encodeURIComponent(entry.repo)}/readme`
-          );
+        if (!imageUrl) {
+          try {
+            const readmeResponse = await fetch(
+              `https://api.github.com/repos/${githubUser}/${encodeURIComponent(entry.repo)}/readme`
+            );
 
-          if (readmeResponse.ok) {
-            const readmeData = await readmeResponse.json();
-            const markdown = readmeData.content ? decodeBase64Utf8(readmeData.content) : "";
-            imageUrl = extractFirstImageUrl(markdown, repo.name, repo.default_branch);
+            if (readmeResponse.ok) {
+              const readmeData = await readmeResponse.json();
+              const markdown = readmeData.content ? decodeBase64Utf8(readmeData.content) : "";
+              imageUrl = extractFirstImageUrl(markdown, repo.name, repo.default_branch);
+            }
+          } catch (error) {
+            imageUrl = entry.imageUrl || "";
           }
-        } catch (error) {
-          imageUrl = "";
         }
 
         setFeaturedProjectContent(key, {
@@ -412,7 +486,7 @@ async function loadFeaturedProjects() {
           summary: entry.summary || "这个项目暂时没有补充说明。",
           stars: 0,
           updatedAt: new Date().toISOString(),
-          imageUrl: "",
+          imageUrl: entry.imageUrl || "",
           placeholderLabel: entry.placeholderLabel,
           placeholderHint: entry.placeholderHint
         });
@@ -505,10 +579,28 @@ async function loadProjectDetail() {
       readmeNode.textContent = "这个项目暂时没有 README。";
     }
   } catch (error) {
+    const featuredEntry = Object.values(featuredProjectCopy).find(
+      (entry) => entry.repo.toLowerCase() === repoName.toLowerCase()
+    );
+    const fallbackProject = fallbackProjectMap[repoName.toLowerCase()];
+
     document.title = `${repoName} | Chang Xu`;
     nameNode.textContent = repoName;
-    descriptionNode.textContent = "暂时无法载入这个项目。";
-    readmeNode.textContent = "GitHub 项目信息获取失败。";
+    descriptionNode.textContent =
+      featuredEntry?.summary ||
+      fallbackProject?.description ||
+      "暂时无法载入这个项目。";
+    githubLinkNode.href = fallbackProject?.html_url || `https://github.com/${githubUser}/${encodeURIComponent(repoName)}`;
+    seedNode.textContent = "项目";
+    languageNode.textContent = `语言: ${fallbackProject?.language || "未知"}`;
+
+    statsNode.innerHTML = [
+      createStatRow("可见性", "公开"),
+      createStatRow("语言", fallbackProject?.language || "未知"),
+      createStatRow("更新", fallbackProject ? formatDate(fallbackProject.pushed_at) : "未知"),
+      createStatRow("星标", String(fallbackProject?.stargazers_count || 0))
+    ].join("");
+    readmeNode.textContent = "GitHub 项目信息暂时不可用，当前显示的是缓存说明。";
   }
 }
 
