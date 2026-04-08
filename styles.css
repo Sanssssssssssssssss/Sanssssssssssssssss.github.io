@@ -171,6 +171,7 @@ h3 {
 .hero-section {
   display: grid;
   gap: 1.4rem;
+  padding-top: 0.65rem;
 }
 
 .skills-rail,
@@ -280,7 +281,8 @@ h3 {
 .hero-main-split {
   grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.75fr);
   gap: 2rem;
-  align-items: start;
+  align-items: center;
+  min-height: 25rem;
 }
 
 .hero-copy {
