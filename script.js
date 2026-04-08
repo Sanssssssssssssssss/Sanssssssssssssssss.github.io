@@ -30,7 +30,7 @@ function escapeHtml(value) {
 function formatDate(dateString) {
   const date = new Date(dateString);
 
-  return new Intl.DateTimeFormat("en", {
+  return new Intl.DateTimeFormat("zh-CN", {
     year: "numeric",
     month: "short",
     day: "numeric"
@@ -164,37 +164,37 @@ function renderProjects(repos) {
 
   if (!repos.length) {
     projectsGrid.innerHTML = "";
-    projectsStatus.textContent = "No additional public repositories to show yet.";
+    projectsStatus.textContent = "暂时没有更多公开项目。";
     return;
   }
 
   const cards = repos.map((repo, index) => {
     const description = truncateDescriptionForCard(
-      repo.description || "Repository summary not provided yet. Open the detail page to inspect the project directly."
+      repo.description || "这个项目暂时没有补充说明。"
     );
-    const language = repo.language || "Mixed stack";
+    const language = repo.language || "混合";
     const updatedAt = formatDate(repo.pushed_at);
     const detailUrl = `project.html?repo=${encodeURIComponent(repo.name)}`;
-    const starLabel = `${repo.stargazers_count} star${repo.stargazers_count === 1 ? "" : "s"}`;
+    const starLabel = `${repo.stargazers_count} 星`;
 
     return `
       <article class="project-card">
-        <p class="project-index">Archive ${String(index + 1).padStart(2, "0")}</p>
+        <p class="project-index">项目 ${String(index + 1).padStart(2, "0")}</p>
         <a class="project-title-link" href="${detailUrl}">
           <h3>${escapeHtml(repo.name)}</h3>
         </a>
         <p class="project-description">${escapeHtml(description)}</p>
-        <p class="project-meta">${escapeHtml(starLabel)} · Updated ${escapeHtml(updatedAt)}</p>
+        <p class="project-meta">${escapeHtml(starLabel)} · 更新于 ${escapeHtml(updatedAt)}</p>
         <div class="project-tag-row">
           ${createTag(language)}
-          <a class="project-detail-button" href="${detailUrl}">View details</a>
+          <a class="project-detail-button" href="${detailUrl}">详情</a>
         </div>
       </article>
     `;
   });
 
   projectsGrid.innerHTML = cards.join("");
-  projectsStatus.textContent = "Additional repositories, sorted by public signal and recent activity.";
+  projectsStatus.textContent = "按公开信号和最近更新排序。";
 }
 
 async function loadProjects() {
@@ -226,7 +226,7 @@ async function loadProjects() {
 
     renderProjects(repos);
   } catch (error) {
-    projectsStatus.textContent = "Unable to load the repository archive right now.";
+    projectsStatus.textContent = "暂时无法载入项目。";
   }
 }
 
@@ -268,10 +268,10 @@ async function loadProjectDetail() {
   const repoName = params.get("repo");
 
   if (!repoName) {
-    document.title = "Project not found | Chang (Sans) Xu";
-    nameNode.textContent = "Project not found";
-    descriptionNode.textContent = "No repository name was provided in the URL.";
-    readmeNode.textContent = "Add ?repo=repository-name to the URL to open a repository detail view.";
+    document.title = "项目未找到 | Chang Xu";
+    nameNode.textContent = "项目未找到";
+    descriptionNode.textContent = "链接里没有仓库名。";
+    readmeNode.textContent = "在地址里加上 ?repo=repository-name 可以打开项目详情页。";
     return;
   }
 
@@ -286,9 +286,9 @@ async function loadProjectDetail() {
     const readmeResponse = await fetch(`https://api.github.com/repos/${githubUser}/${encodeURIComponent(repoName)}/readme`);
     const readmeData = readmeResponse.ok ? await readmeResponse.json() : null;
 
-    document.title = `${repo.name} | Chang (Sans) Xu`;
+    document.title = `${repo.name} | Chang Xu`;
     nameNode.textContent = repo.name;
-    descriptionNode.textContent = repo.description || "No repository description yet. Use the README and repository history for deeper context.";
+    descriptionNode.textContent = repo.description || "这个项目暂时没有补充说明。";
     githubLinkNode.href = repo.html_url;
 
     if (repo.homepage) {
@@ -296,28 +296,28 @@ async function loadProjectDetail() {
       homeLinkNode.classList.remove("hidden-link");
     }
 
-    seedNode.textContent = `Repository #${repo.id}`;
-    languageNode.textContent = `Language: ${repo.language || "Unknown"}`;
+    seedNode.textContent = `项目 #${repo.id}`;
+    languageNode.textContent = `语言: ${repo.language || "未知"}`;
 
     statsNode.innerHTML = [
-      createStatRow("Visibility", repo.private ? "Private" : "Public"),
-      createStatRow("Primary language", repo.language || "Unknown"),
-      createStatRow("Last update", formatDate(repo.pushed_at)),
-      createStatRow("Stars", String(repo.stargazers_count)),
-      createStatRow("Open issues", String(repo.open_issues_count)),
-      createStatRow("Default branch", repo.default_branch)
+      createStatRow("可见性", repo.private ? "私有" : "公开"),
+      createStatRow("语言", repo.language || "未知"),
+      createStatRow("更新", formatDate(repo.pushed_at)),
+      createStatRow("星标", String(repo.stargazers_count)),
+      createStatRow("问题", String(repo.open_issues_count)),
+      createStatRow("分支", repo.default_branch)
     ].join("");
 
     if (readmeData && readmeData.content) {
       readmeNode.textContent = decodeBase64Utf8(readmeData.content).slice(0, 8000);
     } else {
-      readmeNode.textContent = "No README available for this repository yet.";
+      readmeNode.textContent = "这个项目暂时没有 README。";
     }
   } catch (error) {
-    document.title = `${repoName} | Chang (Sans) Xu`;
+    document.title = `${repoName} | Chang Xu`;
     nameNode.textContent = repoName;
-    descriptionNode.textContent = "Unable to load this repository right now.";
-    readmeNode.textContent = "GitHub repository details could not be fetched.";
+    descriptionNode.textContent = "暂时无法载入这个项目。";
+    readmeNode.textContent = "GitHub 项目信息获取失败。";
   }
 }
 
