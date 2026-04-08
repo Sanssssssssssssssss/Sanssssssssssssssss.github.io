@@ -1,5 +1,5 @@
 :root {
-  --bg: #1a1915;
+  --bg: #000000;
   --bg-soft: #201f1a;
   --surface: rgba(42, 41, 34, 0.74);
   --surface-strong: #2a2922;
@@ -63,12 +63,13 @@ img {
 
 .backdrop,
 .paper-grid {
-  display: none;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
 }
 
 .backdrop {
-  filter: blur(72px);
-  opacity: 0.72;
+  display: none;
 }
 
 .backdrop-a {
@@ -85,6 +86,13 @@ img {
   height: 28rem;
   border-radius: 999px;
   background: rgba(90, 138, 184, 0.16);
+}
+
+.paper-grid {
+  background-image:
+    linear-gradient(rgba(230, 229, 224, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(230, 229, 224, 0.035) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
 .site-header,
@@ -208,6 +216,23 @@ h3 {
   background: transparent;
   box-shadow: none;
   backdrop-filter: none;
+}
+
+.hero-portrait {
+  width: 104px;
+  height: 104px;
+  margin-bottom: 1rem;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--surface-strong);
+}
+
+.hero-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .eyebrow,
