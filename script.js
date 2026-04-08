@@ -323,7 +323,7 @@ function setFeaturedProjectContent(key, payload) {
   }
 
   if (metaNode) {
-    metaNode.textContent = `${payload.stars} 星 · 更新于 ${formatDate(payload.updatedAt)}`;
+    metaNode.textContent = `更新于 ${formatDate(payload.updatedAt)}`;
   }
 
   if (visualNode) {
@@ -347,8 +347,6 @@ function renderProjects(repos) {
     const language = repo.language || "Mixed";
     const updatedAt = formatDate(repo.pushed_at);
     const detailUrl = `project.html?repo=${encodeURIComponent(repo.name)}`;
-    const starLabel = `${repo.stargazers_count} 星`;
-
     return `
       <article
         class="project-card clickable-card"
@@ -364,7 +362,7 @@ function renderProjects(repos) {
         </div>
         <div class="project-card-footer">
           <div class="project-footer-meta">
-            <p class="project-meta">${escapeHtml(starLabel)} · 更新于 ${escapeHtml(updatedAt)}</p>
+            <p class="project-meta">更新于 ${escapeHtml(updatedAt)}</p>
             ${createTag(language)}
           </div>
           <a class="project-detail-button" href="${escapeHtml(repo.html_url)}" target="_blank" rel="noreferrer">GitHub</a>
