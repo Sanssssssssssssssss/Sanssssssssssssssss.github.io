@@ -13,6 +13,28 @@ const featuredRepos = new Set([
   "Ragclaw",
   "endoscopic-image-acquisition-system"
 ].map((name) => name.toLowerCase()));
+const featuredProjectCopy = {
+  "keysight-automation-studio": {
+    repo: "KeySight-Oscilloscope-Automation-Software",
+    summary:
+      "Keysight Automation Studio 是一个面向 Keysight 示波器流程的 Windows 桌面客户端，把设备连接、波形采集、预设管理、脚本包和批处理放进同一个 Qt 应用。"
+  },
+  "udp-image-receiver-display": {
+    repo: "UDP-High-Speed-Image-Receiver-Display-System",
+    summary:
+      "这是一个基于 UDP 的高性能图像接收与显示系统，目标是以每秒 24,000 个数据包的速度接收图像数据、重建帧并完成实时显示。"
+  },
+  ragclaw: {
+    repo: "Ragclaw",
+    summary:
+      "Ragclaw 是一个本地优先的 RAG 与 Agent 工作台，重点在可检查的检索、可编辑的长期记忆，以及适合持续研究的工作流。"
+  },
+  "endoscopic-image-acquisition-system": {
+    repo: "endoscopic-image-acquisition-system",
+    summary:
+      "这是一个基于 FPGA 的低延迟内窥镜图像采集系统。"
+  }
+};
 
 if (yearNode) {
   yearNode.textContent = new Date().getFullYear();
@@ -39,6 +61,27 @@ function formatDate(dateString) {
 
 function createTag(label) {
   return `<span class="tag">${escapeHtml(label)}</span>`;
+}
+
+function setFeaturedProjectContent(repoName, summary, updatedAt) {
+  const key = Object.keys(featuredProjectCopy).find(
+    (itemKey) => featuredProjectCopy[itemKey].repo.toLowerCase() === repoName.toLowerCase()
+  );
+
+  if (!key) {
+    return;
+  }
+
+  const summaryNode = document.querySelector(`[data-featured-summary="${key}"]`);
+  const metaNode = document.querySelector(`[data-featured-meta="${key}"]`);
+
+  if (summaryNode) {
+    summaryNode.textContent = summary;
+  }
+
+  if (metaNode) {
+    metaNode.textContent = `更新于 ${formatDate(updatedAt)}`;
+  }
 }
 
 function createStatRow(label, value) {
@@ -230,6 +273,33 @@ async function loadProjects() {
   }
 }
 
+async function loadFeaturedProjects() {
+  const entries = Object.values(featuredProjectCopy);
+
+  if (!entries.length) {
+    return;
+  }
+
+  await Promise.all(
+    entries.map(async (entry) => {
+      try {
+        const response = await fetch(`https://api.github.com/repos/${githubUser}/${encodeURIComponent(entry.repo)}`);
+
+        if (!response.ok) {
+          throw new Error(`GitHub API responded with ${response.status}`);
+        }
+
+        const repo = await response.json();
+        const summary = entry.summary || repo.description || "这个项目暂时没有补充说明。";
+
+        setFeaturedProjectContent(repo.name, summary, repo.pushed_at);
+      } catch (error) {
+        setFeaturedProjectContent(entry.repo, entry.summary || "这个项目暂时没有补充说明。", new Date().toISOString());
+      }
+    })
+  );
+}
+
 async function loadPhotoGallery() {
   if (!photoTrackPrimary || !photoTrackSecondary) {
     return;
@@ -322,5 +392,6 @@ async function loadProjectDetail() {
 }
 
 loadProjects();
+loadFeaturedProjects();
 loadPhotoGallery();
 loadProjectDetail();
