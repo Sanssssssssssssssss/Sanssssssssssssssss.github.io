@@ -6,12 +6,12 @@
   <title>Chang Xu</title>
   <meta
     name="description"
-    content="Chang Xu 的个人网站。系统工程、应用型 AI 与硬件软件协同。"
+    content="Chang Xu 的个人站点，聚焦系统设计、软硬件协同、AI 部署与工程工具。"
   >
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260408-copyfix2">
+  <link rel="stylesheet" href="styles.css?v=20260408-layoutwide1">
 </head>
 <body>
   <div class="site-shell">
@@ -22,7 +22,7 @@
     <header class="site-header">
       <div class="brand-block">
         <a class="brand-link" href="#top">Chang Xu</a>
-        <p class="brand-note">系统工程、应用型 AI 与硬件软件协同。</p>
+        <p class="brand-note">系统设计、AI 部署与软硬件协同</p>
       </div>
       <nav class="site-nav" aria-label="Primary">
         <a href="#about">关于</a>
@@ -36,82 +36,102 @@
 
     <main id="top" class="page-main">
       <section class="hero-section">
-        <div class="hero-copy">
-          <div class="hero-portrait">
-            <img src="assets/profile/hero-photo.jpg" alt="Chang Xu 的照片" loading="eager">
-          </div>
-          <h1>Chang Xu</h1>
-          <p class="hero-identity">系统工程、应用型 AI 与硬件软件协同。</p>
-          <p class="hero-lead">
-            剑桥大学 Data Intensive Science MPhil，在找全职机会。
-          </p>
-          <div class="hero-actions">
-            <a class="button button-dark" href="#selected-work">项目</a>
-            <a class="button button-soft" href="https://github.com/Sanssssssssssssssss" target="_blank" rel="noreferrer">GitHub</a>
-          </div>
-          <div class="signal-row" aria-label="Signature themes">
-            <span class="signal-pill">
+        <div class="skills-rail" aria-label="Skills overview">
+          <article class="skill-card">
+            <span class="skill-icon">
               <img src="assets/icons/redstone-dust.svg" alt="" aria-hidden="true">
-              系统工程
             </span>
-            <span class="signal-pill">
+            <div class="skill-copy">
+              <strong>系统设计</strong>
+              <span>架构 / 数据路径 / 软件架构</span>
+            </div>
+          </article>
+          <article class="skill-card">
+            <span class="skill-icon skill-icon-text">RTL</span>
+            <div class="skill-copy">
+              <strong>FPGA / RTL</strong>
+              <span>Verilog / VHDL / Vivado</span>
+            </div>
+          </article>
+          <article class="skill-card">
+            <span class="skill-icon">
+              <img src="assets/icons/ender-eye.svg" alt="" aria-hidden="true">
+            </span>
+            <div class="skill-copy">
+              <strong>实时图像</strong>
+              <span>C++ / 高吞吐 / 低延迟显示</span>
+            </div>
+          </article>
+          <article class="skill-card">
+            <span class="skill-icon">
               <img src="assets/icons/diamond-pickaxe.svg" alt="" aria-hidden="true">
-              工具开发
             </span>
-            <span class="signal-pill">
-              <img src="assets/icons/oak-log.svg" alt="" aria-hidden="true">
-              应用型 AI
-            </span>
-          </div>
+            <div class="skill-copy">
+              <strong>工具开发</strong>
+              <span>Python / Qt / 自动化</span>
+            </div>
+          </article>
+          <article class="skill-card">
+            <span class="skill-icon skill-icon-text">AI</span>
+            <div class="skill-copy">
+              <strong>AI 部署</strong>
+              <span>RAG / Agent / 应用型落地</span>
+            </div>
+          </article>
         </div>
 
-        <aside class="hero-panel">
-          <div class="panel-heading">
-            <span>简历</span>
-            <span>2026</span>
-          </div>
-          <div class="hero-panel-body">
-            <div class="fact-list">
-              <div class="fact-row">
-                <span class="fact-key">学历</span>
-                <strong>剑桥大学 MPhil</strong>
-              </div>
-              <div class="fact-row">
-                <span class="fact-key">工具</span>
-                <strong>Verilog / Vivado / Python / C++ / Qt / Web</strong>
-              </div>
-              <div class="fact-row">
-                <span class="fact-key">方向</span>
-                <strong>系统、成像、工具、AI</strong>
-              </div>
-              <div class="fact-row">
-                <span class="fact-key">状态</span>
-                <strong>全职机会</strong>
-              </div>
+        <div class="hero-main">
+          <div class="hero-copy">
+            <div class="hero-portrait">
+              <img src="assets/profile/hero-photo.jpg" alt="Chang Xu 的照片" loading="eager">
             </div>
-            <div class="timeline-card">
-              <div class="timeline-step tone-think">
+            <h1>Chang Xu</h1>
+            <p class="hero-identity">软件硬件系统工程师，做系统设计、应用型 AI 与硬件软件协同。</p>
+            <p class="hero-lead">剑桥大学 MPhil Data Intensive Science。</p>
+            <p class="hero-summary">
+              做过 FPGA 图像预处理链路、高吞吐 UDP 图像接收、桌面自动化工具，以及本地优先的 RAG / Agent 工具。
+            </p>
+            <div class="hero-actions">
+              <a class="button button-dark" href="#selected-work">项目</a>
+              <a class="button button-soft" href="https://github.com/Sanssssssssssssssss" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+            <div class="signal-row" aria-label="Signature themes">
+              <span class="signal-pill">
+                <img src="assets/icons/redstone-dust.svg" alt="" aria-hidden="true">
+                系统工程
+              </span>
+              <span class="signal-pill">
+                <img src="assets/icons/diamond-pickaxe.svg" alt="" aria-hidden="true">
+                工具开发
+              </span>
+              <span class="signal-pill">
+                <img src="assets/icons/oak-log.svg" alt="" aria-hidden="true">
+                应用型 AI
+              </span>
+            </div>
+            <div class="hero-highlights">
+              <article class="hero-highlight">
                 <span class="timeline-label">系统</span>
-                <p>成像、数据路径、性能约束。</p>
-              </div>
-              <div class="timeline-step tone-read">
-                <span class="timeline-label">工具</span>
-                <p>桌面软件、自动化、工程工具。</p>
-              </div>
-              <div class="timeline-step tone-edit">
-                <span class="timeline-label">表达</span>
-                <p>页面、排版、信息组织。</p>
-              </div>
+                <p>系统设计、软件架构、软硬件协同。</p>
+              </article>
+              <article class="hero-highlight">
+                <span class="timeline-label">成像</span>
+                <p>FPGA 图像预处理、高吞吐接收、低延迟显示。</p>
+              </article>
+              <article class="hero-highlight">
+                <span class="timeline-label">AI</span>
+                <p>RAG、Agent、桌面工具和工程化部署。</p>
+              </article>
             </div>
           </div>
-        </aside>
+        </div>
       </section>
 
       <section id="about" class="content-section">
         <div class="section-copy">
           <h2>关于</h2>
           <p>
-            我是软件硬件系统工程师，目前在剑桥大学 Data Intensive Science MPhil 继续进修。我的工作重点在系统设计、硬件软件协同、成像链路和应用型 AI 部署，也做桌面工具、数据路径和工程化实现。比起只做单点功能，我更习惯从整体结构、性能约束和落地方式一起看问题。
+            我是软件硬件系统工程师，目前在剑桥大学攻读 MPhil Data Intensive Science。我的工作经验主要落在系统设计、软件架构、硬件软件协同、成像链路、桌面工具和应用型 AI 部署，也长期在做工程化实现。比起只做单点功能，我更习惯从结构、约束、性能和最终落地方式一起看问题。
           </p>
         </div>
       </section>
@@ -125,29 +145,29 @@
             <span class="icon-chip">
               <img src="assets/icons/redstone-dust.svg" alt="" aria-hidden="true">
             </span>
-            <h3>系统意识</h3>
-            <p>能从模块关系、数据路径和边界条件出发做系统设计。</p>
-          </article>
-          <article class="strength-card">
-            <span class="icon-chip">
-              <img src="assets/icons/diamond-pickaxe.svg" alt="" aria-hidden="true">
-            </span>
-            <h3>性能约束</h3>
-            <p>做过高吞吐图像接收、低延迟链路和 FPGA 图像预处理加速。</p>
+            <h3>系统设计</h3>
+            <p>能把采集、处理、传输、显示和工具链放到同一个系统里看。</p>
           </article>
           <article class="strength-card">
             <span class="icon-chip">
               <img src="assets/icons/oak-log.svg" alt="" aria-hidden="true">
             </span>
-            <h3>工具感</h3>
-            <p>能把零散流程整理成可复用的桌面工具和工程模块。</p>
+            <h3>AI 部署</h3>
+            <p>做过 RAG、Agent 和应用型 AI 系统的部署、整理和落地。</p>
           </article>
           <article class="strength-card">
             <span class="icon-chip">
               <img src="assets/icons/ender-eye.svg" alt="" aria-hidden="true">
             </span>
-            <h3>视觉判断</h3>
-            <p>在意界面、排版和信息组织，也能把复杂内容讲清楚。</p>
+            <h3>图像链路</h3>
+            <p>包括 FPGA 图像预处理、高吞吐接收和低延迟显示系统。</p>
+          </article>
+          <article class="strength-card">
+            <span class="icon-chip">
+              <img src="assets/icons/diamond-pickaxe.svg" alt="" aria-hidden="true">
+            </span>
+            <h3>工具开发</h3>
+            <p>会用 Qt、Python 和自动化流程做真正能用的桌面工具。</p>
           </article>
         </div>
       </section>
@@ -161,66 +181,82 @@
         </div>
 
         <div class="featured-grid">
-          <article class="featured-card">
+          <article
+            class="featured-card clickable-card"
+            tabindex="0"
+            role="link"
+            data-detail-url="project.html?repo=KeySight-Oscilloscope-Automation-Software"
+            aria-label="打开 KeySight Automation Studio 项目详情"
+          >
+            <div class="featured-visual" data-featured-visual="keysight-automation-studio"></div>
             <div class="featured-meta">
               <span class="tag tag-accent">桌面软件</span>
               <span class="mono-text">Qt / 自动化</span>
             </div>
             <h3>Keysight Automation Studio</h3>
-            <p class="featured-description" data-featured-summary="keysight-automation-studio">
-              正在载入项目介绍。
-            </p>
-            <p class="project-meta" data-featured-meta="keysight-automation-studio">正在载入项目信息。</p>
-            <div class="project-tag-row">
-              <a class="project-detail-button" href="project.html?repo=KeySight-Oscilloscope-Automation-Software">详情</a>
+            <p class="featured-description" data-featured-summary="keysight-automation-studio">正在载入项目介绍。</p>
+            <div class="project-card-footer">
+              <p class="project-meta" data-featured-meta="keysight-automation-studio">正在载入项目信息。</p>
               <a class="project-detail-button" href="https://github.com/Sanssssssssssssssss/KeySight-Oscilloscope-Automation-Software" target="_blank" rel="noreferrer">GitHub</a>
             </div>
           </article>
 
-          <article class="featured-card">
+          <article
+            class="featured-card clickable-card"
+            tabindex="0"
+            role="link"
+            data-detail-url="project.html?repo=UDP-High-Speed-Image-Receiver-Display-System"
+            aria-label="打开 UDP Image Receiver &amp; Display 项目详情"
+          >
+            <div class="featured-visual" data-featured-visual="udp-image-receiver-display"></div>
             <div class="featured-meta">
               <span class="tag tag-mint">高吞吐</span>
               <span class="mono-text">24,000 packets/s</span>
             </div>
-            <h3>UDP Image Receiver & Display</h3>
-            <p class="featured-description" data-featured-summary="udp-image-receiver-display">
-              正在载入项目介绍。
-            </p>
-            <p class="project-meta" data-featured-meta="udp-image-receiver-display">正在载入项目信息。</p>
-            <div class="project-tag-row">
-              <a class="project-detail-button" href="project.html?repo=UDP-High-Speed-Image-Receiver-Display-System">详情</a>
+            <h3>UDP Image Receiver &amp; Display</h3>
+            <p class="featured-description" data-featured-summary="udp-image-receiver-display">正在载入项目介绍。</p>
+            <div class="project-card-footer">
+              <p class="project-meta" data-featured-meta="udp-image-receiver-display">正在载入项目信息。</p>
               <a class="project-detail-button" href="https://github.com/Sanssssssssssssssss/UDP-High-Speed-Image-Receiver-Display-System" target="_blank" rel="noreferrer">GitHub</a>
             </div>
           </article>
 
-          <article class="featured-card">
+          <article
+            class="featured-card clickable-card"
+            tabindex="0"
+            role="link"
+            data-detail-url="project.html?repo=Ragclaw"
+            aria-label="打开 Ragclaw 项目详情"
+          >
+            <div class="featured-visual" data-featured-visual="ragclaw"></div>
             <div class="featured-meta">
               <span class="tag tag-blue">AI</span>
               <span class="mono-text">RAG / Agent</span>
             </div>
             <h3>Ragclaw</h3>
-            <p class="featured-description" data-featured-summary="ragclaw">
-              正在载入项目介绍。
-            </p>
-            <p class="project-meta" data-featured-meta="ragclaw">正在载入项目信息。</p>
-            <div class="project-tag-row">
-              <a class="project-detail-button" href="project.html?repo=Ragclaw">详情</a>
+            <p class="featured-description" data-featured-summary="ragclaw">正在载入项目介绍。</p>
+            <div class="project-card-footer">
+              <p class="project-meta" data-featured-meta="ragclaw">正在载入项目信息。</p>
               <a class="project-detail-button" href="https://github.com/Sanssssssssssssssss/Ragclaw" target="_blank" rel="noreferrer">GitHub</a>
             </div>
           </article>
 
-          <article class="featured-card">
+          <article
+            class="featured-card clickable-card"
+            tabindex="0"
+            role="link"
+            data-detail-url="project.html?repo=ov6946-fpga-image-preprocess-accel-pipeline"
+            aria-label="打开 ov6946 FPGA 项目详情"
+          >
+            <div class="featured-visual" data-featured-visual="ov6946-fpga-image-preprocess-accel-pipeline"></div>
             <div class="featured-meta">
               <span class="tag tag-rose">硬件</span>
               <span class="mono-text">FPGA / 成像</span>
             </div>
             <h3>ov6946-fpga-image-preprocess-accel-pipeline</h3>
-            <p class="featured-description" data-featured-summary="ov6946-fpga-image-preprocess-accel-pipeline">
-              正在载入项目介绍。
-            </p>
-            <p class="project-meta" data-featured-meta="ov6946-fpga-image-preprocess-accel-pipeline">正在载入项目信息。</p>
-            <div class="project-tag-row">
-              <a class="project-detail-button" href="project.html?repo=ov6946-fpga-image-preprocess-accel-pipeline">详情</a>
+            <p class="featured-description" data-featured-summary="ov6946-fpga-image-preprocess-accel-pipeline">正在载入项目介绍。</p>
+            <div class="project-card-footer">
+              <p class="project-meta" data-featured-meta="ov6946-fpga-image-preprocess-accel-pipeline">正在载入项目信息。</p>
               <a class="project-detail-button" href="https://github.com/Sanssssssssssssssss/ov6946-fpga-image-preprocess-accel-pipeline" target="_blank" rel="noreferrer">GitHub</a>
             </div>
           </article>
@@ -240,7 +276,7 @@
       <section id="photography" class="content-section photography-section">
         <div class="section-heading">
           <h2>摄影</h2>
-          <p class="section-intro">摄影之外，我也一直在练习观察和取景。</p>
+          <p class="section-intro">摄影也是我一直保留着的另一条线。</p>
         </div>
         <div class="photo-marquee" aria-label="Photography gallery moving left">
           <div id="photo-track-primary" class="photo-track"></div>
@@ -268,10 +304,10 @@
     </main>
 
     <footer class="site-footer">
-      <p>© <span id="current-year"></span> Chang Xu</p>
+      <p>&copy; <span id="current-year"></span> Chang Xu</p>
     </footer>
   </div>
 
-  <script src="script.js?v=20260408-copyfix1"></script>
+  <script src="script.js?v=20260408-layoutwide1"></script>
 </body>
 </html>
