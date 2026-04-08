@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260408-layoutwide1">
+  <link rel="stylesheet" href="styles.css?v=20260408-heroengineer1">
 </head>
 <body>
   <div class="site-shell">
@@ -35,140 +35,61 @@
     </header>
 
     <main id="top" class="page-main">
-      <section class="hero-section">
-        <div class="skills-rail" aria-label="Skills overview">
-          <article class="skill-card">
-            <span class="skill-icon">
-              <img src="assets/icons/redstone-dust.svg" alt="" aria-hidden="true">
-            </span>
-            <div class="skill-copy">
-              <strong>系统设计</strong>
-              <span>架构 / 数据路径 / 软件架构</span>
-            </div>
-          </article>
-          <article class="skill-card">
-            <span class="skill-icon skill-icon-text">RTL</span>
-            <div class="skill-copy">
-              <strong>FPGA / RTL</strong>
-              <span>Verilog / VHDL / Vivado</span>
-            </div>
-          </article>
-          <article class="skill-card">
-            <span class="skill-icon">
-              <img src="assets/icons/ender-eye.svg" alt="" aria-hidden="true">
-            </span>
-            <div class="skill-copy">
-              <strong>实时图像</strong>
-              <span>C++ / 高吞吐 / 低延迟显示</span>
-            </div>
-          </article>
-          <article class="skill-card">
-            <span class="skill-icon">
-              <img src="assets/icons/diamond-pickaxe.svg" alt="" aria-hidden="true">
-            </span>
-            <div class="skill-copy">
-              <strong>工具开发</strong>
-              <span>Python / Qt / 自动化</span>
-            </div>
-          </article>
-          <article class="skill-card">
-            <span class="skill-icon skill-icon-text">AI</span>
-            <div class="skill-copy">
-              <strong>AI 部署</strong>
-              <span>RAG / Agent / 应用型落地</span>
-            </div>
-          </article>
-        </div>
-
-        <div class="hero-main">
+      <section id="about" class="hero-section">
+        <div class="hero-main hero-main-split">
           <div class="hero-copy">
-            <div class="hero-portrait">
-              <img src="assets/profile/hero-photo.jpg" alt="Chang Xu 的照片" loading="eager">
+            <div class="hero-meta">
+              <span>软件硬件系统工程师</span>
+              <span>剑桥大学 MPhil Data Intensive Science</span>
             </div>
             <h1>Chang Xu</h1>
-            <p class="hero-identity">软件硬件系统工程师，做系统设计、应用型 AI 与硬件软件协同。</p>
-            <p class="hero-lead">剑桥大学 MPhil Data Intensive Science。</p>
+            <p class="hero-identity">做系统设计、软件架构、图像链路、工程工具与应用型 AI 部署。</p>
             <p class="hero-summary">
-              做过 FPGA 图像预处理链路、高吞吐 UDP 图像接收、桌面自动化工具，以及本地优先的 RAG / Agent 工具。
+              经验主要在硬件软件协同、FPGA 图像预处理、高吞吐 UDP 图像接收、桌面自动化工具，以及本地优先的 RAG / Agent 系统。
+            </p>
+            <p class="hero-lead">
+              我喜欢把复杂系统做得可靠，也喜欢把界面、信息和交互整理得更清楚一点。
             </p>
             <div class="hero-actions">
               <a class="button button-dark" href="#selected-work">项目</a>
               <a class="button button-soft" href="https://github.com/Sanssssssssssssssss" target="_blank" rel="noreferrer">GitHub</a>
             </div>
-            <div class="signal-row" aria-label="Signature themes">
-              <span class="signal-pill">
-                <img src="assets/icons/redstone-dust.svg" alt="" aria-hidden="true">
-                系统工程
-              </span>
-              <span class="signal-pill">
-                <img src="assets/icons/diamond-pickaxe.svg" alt="" aria-hidden="true">
-                工具开发
-              </span>
-              <span class="signal-pill">
-                <img src="assets/icons/oak-log.svg" alt="" aria-hidden="true">
-                应用型 AI
-              </span>
-            </div>
-            <div class="hero-highlights">
-              <article class="hero-highlight">
-                <span class="timeline-label">系统</span>
-                <p>系统设计、软件架构、软硬件协同。</p>
+            <div id="strengths" class="strength-grid hero-strength-grid">
+              <article class="strength-card">
+                <span class="icon-chip">
+                  <img src="assets/icons/redstone-dust.svg" alt="" aria-hidden="true">
+                </span>
+                <h3>系统设计</h3>
+                <p>能把采集、处理、传输、显示和工具链放到同一个系统里看。</p>
               </article>
-              <article class="hero-highlight">
-                <span class="timeline-label">成像</span>
-                <p>FPGA 图像预处理、高吞吐接收、低延迟显示。</p>
+              <article class="strength-card">
+                <span class="icon-chip">
+                  <img src="assets/icons/oak-log.svg" alt="" aria-hidden="true">
+                </span>
+                <h3>AI 部署</h3>
+                <p>做过 RAG、Agent 和应用型 AI 系统的部署、整理和落地。</p>
               </article>
-              <article class="hero-highlight">
-                <span class="timeline-label">AI</span>
-                <p>RAG、Agent、桌面工具和工程化部署。</p>
+              <article class="strength-card">
+                <span class="icon-chip">
+                  <img src="assets/icons/ender-eye.svg" alt="" aria-hidden="true">
+                </span>
+                <h3>图像链路</h3>
+                <p>包括 FPGA 图像预处理、高吞吐接收和低延迟显示系统。</p>
+              </article>
+              <article class="strength-card">
+                <span class="icon-chip">
+                  <img src="assets/icons/diamond-pickaxe.svg" alt="" aria-hidden="true">
+                </span>
+                <h3>工具开发</h3>
+                <p>会用 Qt、Python 和自动化流程做真正能用的桌面工具。</p>
               </article>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section id="about" class="content-section">
-        <div class="section-copy">
-          <h2>关于</h2>
-          <p>
-            我是软件硬件系统工程师，目前在剑桥大学攻读 MPhil Data Intensive Science。我的工作经验主要落在系统设计、软件架构、硬件软件协同、成像链路、桌面工具和应用型 AI 部署，也长期在做工程化实现。比起只做单点功能，我更习惯从结构、约束、性能和最终落地方式一起看问题。
-          </p>
-        </div>
-      </section>
-
-      <section id="strengths" class="content-section">
-        <div class="section-heading">
-          <h2>能力</h2>
-        </div>
-        <div class="strength-grid">
-          <article class="strength-card">
-            <span class="icon-chip">
-              <img src="assets/icons/redstone-dust.svg" alt="" aria-hidden="true">
-            </span>
-            <h3>系统设计</h3>
-            <p>能把采集、处理、传输、显示和工具链放到同一个系统里看。</p>
-          </article>
-          <article class="strength-card">
-            <span class="icon-chip">
-              <img src="assets/icons/oak-log.svg" alt="" aria-hidden="true">
-            </span>
-            <h3>AI 部署</h3>
-            <p>做过 RAG、Agent 和应用型 AI 系统的部署、整理和落地。</p>
-          </article>
-          <article class="strength-card">
-            <span class="icon-chip">
-              <img src="assets/icons/ender-eye.svg" alt="" aria-hidden="true">
-            </span>
-            <h3>图像链路</h3>
-            <p>包括 FPGA 图像预处理、高吞吐接收和低延迟显示系统。</p>
-          </article>
-          <article class="strength-card">
-            <span class="icon-chip">
-              <img src="assets/icons/diamond-pickaxe.svg" alt="" aria-hidden="true">
-            </span>
-            <h3>工具开发</h3>
-            <p>会用 Qt、Python 和自动化流程做真正能用的桌面工具。</p>
-          </article>
+          <div class="hero-visual">
+            <div class="hero-portrait hero-portrait-large">
+              <img src="assets/profile/hero-photo.jpg" alt="Chang Xu 的照片" loading="eager">
+            </div>
+          </div>
         </div>
       </section>
 
