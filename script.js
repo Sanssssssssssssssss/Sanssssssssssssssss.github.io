@@ -11,7 +11,7 @@ const featuredRepos = new Set([
   "KeySight-Oscilloscope-Automation-Software",
   "UDP-High-Speed-Image-Receiver-Display-System",
   "Ragclaw",
-  "endoscopic-image-acquisition-system"
+  "ov6946-fpga-image-preprocess-accel-pipeline"
 ].map((name) => name.toLowerCase()));
 const featuredProjectCopy = {
   "keysight-automation-studio": {
@@ -29,10 +29,10 @@ const featuredProjectCopy = {
     summary:
       "Ragclaw 是一个本地优先的 RAG 与 Agent 工作台，重点在可检查的检索、可编辑的长期记忆，以及适合持续研究的工作流。"
   },
-  "endoscopic-image-acquisition-system": {
-    repo: "endoscopic-image-acquisition-system",
+  "ov6946-fpga-image-preprocess-accel-pipeline": {
+    repo: "ov6946-fpga-image-preprocess-accel-pipeline",
     summary:
-      "这是一个基于 FPGA 的低延迟内窥镜图像采集系统。"
+      "这是一个围绕 OV6946 传感器输入、DDR3 帧缓存、图像预处理和 HDMI 输出展开的 FPGA 图像预处理加速链路。"
   }
 };
 
