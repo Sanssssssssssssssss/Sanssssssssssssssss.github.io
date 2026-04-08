@@ -2,16 +2,15 @@
 
 ## To Do
 
-- Confirm project priorities, audience, and MVP definition
-- Review current prototype against documented requirements
-- Replace placeholder content with confirmed real content
 - Validate responsive behavior on mobile and desktop
-- Verify navigation, links, and page-to-page flow
+- Verify navigation, links, and page-to-page flow after the redesign
+- Refine project wording and curation for specific target roles
+- Replace generic gallery captions if stronger photo metadata becomes available
 - Prepare first runnable version for static deployment
 
 ## In Progress
 
-- Review current prototype against documented requirements
+- Validate the redesigned portfolio against job-seeking communication goals
 
 ## Done
 
@@ -27,11 +26,13 @@
 - Converted the homepage photo gallery to manifest-driven rendering
 - Added photo asset support for `.png`, `.jpg`, `.jpeg`, `.heic`, and `.svg`
 - Added a gallery manifest generation script for static hosting workflows
+- Reframed the site away from a Minecraft-heavy presentation toward a warm editorial portfolio direction
+- Rewrote homepage and project-detail copy to foreground systems engineering, AI work, and hardware-software co-design
+- Preserved pixel-style icons as subtle accents instead of primary theme drivers
+- Kept the photography section as part of the personal brand while integrating it into the more professional visual system
 
 ## Blocked
 
-- Final content decisions are blocked on stakeholder confirmation
-- Theme permanence is blocked on stakeholder confirmation
 - Reliable cross-browser HEIC display is blocked by browser/platform codec support
 
 ## Notes

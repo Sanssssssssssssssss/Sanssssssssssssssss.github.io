@@ -1,59 +1,66 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project World | Chang (Sans) Xu</title>
+  <title>Project Detail | Chang (Sans) Xu</title>
   <meta
     name="description"
-    content="Detailed project world page for repositories by Chang (Sans) Xu."
+    content="Project detail page for repositories by Chang (Sans) Xu."
   >
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="page-shell world-shell detail-shell">
-    <div class="sky-glow sky-glow-a"></div>
-    <div class="sky-glow sky-glow-b"></div>
-    <div class="pixel-noise"></div>
+  <div class="site-shell detail-shell">
+    <div class="backdrop backdrop-a"></div>
+    <div class="backdrop backdrop-b"></div>
+    <div class="paper-grid"></div>
 
-    <header class="top-hud pixel-panel detail-header">
-      <a class="world-title" href="index.html">&lt; Back To Overworld</a>
-      <div class="hud-meta">
-        <span id="detail-seed">SEED: loading...</span>
-        <span id="detail-lang">LANG: --</span>
-        <span id="detail-stars">STARS: --</span>
+    <header class="site-header">
+      <div class="brand-block">
+        <a class="brand-link" href="index.html">Chang Xu</a>
+        <p class="brand-note">Repository detail view</p>
       </div>
+      <nav class="site-nav" aria-label="Project navigation">
+        <a href="index.html#selected-work">Selected work</a>
+        <a href="index.html#photography">Photography</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
     </header>
 
-    <main class="world-main detail-main">
-      <section class="pixel-panel section-panel detail-hero panel-deep">
-        <div class="section-header">
-          <p class="section-tag">[world_info]</p>
-          <h1 id="project-name">Loading project...</h1>
+    <main class="page-main detail-main">
+      <section class="detail-hero">
+        <div class="panel-heading">
+          <span id="detail-seed">Repository detail</span>
+          <span id="detail-lang">Language: --</span>
         </div>
-        <p id="project-description" class="hero-text">Fetching repository metadata from GitHub.</p>
-        <div class="detail-action-row">
-          <a id="project-github-link" class="pixel-button pixel-button-primary" href="#" target="_blank" rel="noreferrer">Open GitHub Repo</a>
-          <a id="project-home-link" class="pixel-button pixel-button-secondary hidden-link" href="#" target="_blank" rel="noreferrer">Open Homepage</a>
+        <div class="detail-hero-body">
+          <p class="section-kicker">Project detail</p>
+          <h1 id="project-name">Loading project...</h1>
+          <p id="project-description" class="hero-lead">Fetching repository metadata from GitHub.</p>
+          <div class="hero-actions">
+            <a id="project-github-link" class="button button-dark" href="#" target="_blank" rel="noreferrer">Open GitHub repo</a>
+            <a id="project-home-link" class="button button-soft hidden-link" href="#" target="_blank" rel="noreferrer">Open live homepage</a>
+          </div>
         </div>
       </section>
 
       <section class="detail-grid">
-        <article class="pixel-panel section-panel detail-card">
-          <div class="section-header compact-header">
-            <p class="section-tag">[stats]</p>
-            <h2>World Stats</h2>
+        <article class="detail-card">
+          <div class="section-heading">
+            <p class="section-kicker">Repository stats</p>
+            <h2>Context and signals</h2>
           </div>
           <div id="project-stats" class="stat-list"></div>
         </article>
 
-        <article class="pixel-panel section-panel detail-card">
-          <div class="section-header compact-header">
-            <p class="section-tag">[lore_book]</p>
-            <h2>README / Notes</h2>
+        <article class="detail-card">
+          <div class="section-heading">
+            <p class="section-kicker">README</p>
+            <h2>Implementation notes</h2>
           </div>
           <div id="project-readme" class="readme-box">Loading README...</div>
         </article>
@@ -61,7 +68,7 @@
     </main>
 
     <footer class="site-footer">
-      <p>Project world viewer for Chang (Sans) Xu.</p>
+      <p>Project detail view for Chang (Sans) Xu.</p>
     </footer>
   </div>
 

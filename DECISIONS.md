@@ -107,3 +107,14 @@
 - Impact:
   - Automatic deployment is implemented via GitHub Actions plus Wrangler.
   - The workflow prepares a clean static upload directory and deploys it to the existing `chang-xu-portfolio` Pages project.
+
+### 2026-04-08 - Reframe the portfolio toward job-seeking with a warm editorial theme
+
+- Status: Accepted
+- Reason:
+  - The previous Minecraft-heavy presentation made the site feel playful first and professional second.
+  - The user wants to preserve a small amount of pixel-icon personality while shifting the overall site toward a more mature, hiring-friendly tone inspired by Cursor's warm editorial visual language.
+- Impact:
+  - The homepage and project detail page use a warm cream palette, editorial typography, calmer cards, and product-portfolio information hierarchy.
+  - Pixel / red-white-console iconography is kept only as a supporting accent language.
+  - Core copy now foregrounds systems engineering, AI work, hardware-software co-design, and hiring relevance.

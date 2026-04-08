@@ -7,6 +7,12 @@ const githubUser = "Sanssssssssssssssss";
 const websiteRepo = `${githubUser}.github.io`.toLowerCase();
 const photoManifestUrl = "assets/photos/manifest.json";
 const supportedPhotoExtensions = new Set([".png", ".jpg", ".jpeg", ".heic", ".svg"]);
+const featuredRepos = new Set([
+  "KeySight-Oscilloscope-Automation-Software",
+  "UDP-High-Speed-Image-Receiver-Display-System",
+  "Ragclaw",
+  "endoscopic-image-acquisition-system"
+].map((name) => name.toLowerCase()));
 
 if (yearNode) {
   yearNode.textContent = new Date().getFullYear();
@@ -32,44 +38,32 @@ function formatDate(dateString) {
 }
 
 function createTag(label) {
-  return `<span class="project-tag">${escapeHtml(label)}</span>`;
+  return `<span class="tag">${escapeHtml(label)}</span>`;
 }
 
 function createStatRow(label, value) {
   return `
-    <div class="stat-row pixel-slot">
+    <div class="stat-row">
       <span class="stat-key">${escapeHtml(label)}</span>
       <strong class="stat-value">${escapeHtml(value)}</strong>
     </div>
   `;
 }
 
-function truncateDescriptionForCard(text, maxLength = 150) {
+function truncateDescriptionForCard(text, maxLength = 168) {
   const normalizedText = String(text || "").replace(/\s+/g, " ").trim();
 
   if (!normalizedText || normalizedText.length <= maxLength) {
     return normalizedText;
   }
 
-  const minimumBoundary = Math.floor(maxLength * 0.55);
   const searchWindow = normalizedText.slice(0, maxLength + 1);
-  const sentenceBoundary = Math.max(
-    searchWindow.lastIndexOf("。"),
-    searchWindow.lastIndexOf("."),
-    searchWindow.lastIndexOf("!"),
-    searchWindow.lastIndexOf("?"),
-    searchWindow.lastIndexOf("！"),
-    searchWindow.lastIndexOf("？")
-  );
+  const boundaries = [".", "!", "?", "。", "！", "？"]
+    .map((token) => searchWindow.lastIndexOf(token))
+    .filter((index) => index >= Math.floor(maxLength * 0.55));
 
-  if (sentenceBoundary >= minimumBoundary) {
-    return normalizedText.slice(0, sentenceBoundary + 1).trim();
-  }
-
-  const nextBoundaryMatch = normalizedText.slice(maxLength).match(/[。.!?！？]/);
-
-  if (nextBoundaryMatch && typeof nextBoundaryMatch.index === "number" && nextBoundaryMatch.index <= 40) {
-    return normalizedText.slice(0, maxLength + nextBoundaryMatch.index + 1).trim();
+  if (boundaries.length) {
+    return normalizedText.slice(0, Math.max(...boundaries) + 1).trim();
   }
 
   return `${normalizedText.slice(0, maxLength).trimEnd()}...`;
@@ -97,7 +91,7 @@ function createPhotoCard(photo, duplicateLabel = "") {
   const duplicateSuffix = duplicateLabel ? ` ${duplicateLabel}` : "";
 
   return `
-    <figure class="photo-card pixel-slot" data-photo-ext="${escapeHtml(getFileExtension(photo.src))}">
+    <figure class="photo-card" data-photo-ext="${escapeHtml(getFileExtension(photo.src))}">
       <img src="${escapeHtml(photo.src)}" alt="${escapeHtml(`${alt}${duplicateSuffix}`)}" loading="lazy">
       <figcaption>${escapeHtml(caption)}</figcaption>
     </figure>
@@ -169,36 +163,38 @@ function renderProjects(repos) {
   }
 
   if (!repos.length) {
-    projectsStatus.textContent = "No public project worlds available yet.";
+    projectsGrid.innerHTML = "";
+    projectsStatus.textContent = "No additional public repositories to show yet.";
     return;
   }
 
   const cards = repos.map((repo, index) => {
     const description = truncateDescriptionForCard(
-      repo.description || "No description yet. Open the world page to inspect the repository directly."
+      repo.description || "Repository summary not provided yet. Open the detail page to inspect the project directly."
     );
-    const language = repo.language || "Code";
+    const language = repo.language || "Mixed stack";
     const updatedAt = formatDate(repo.pushed_at);
     const detailUrl = `project.html?repo=${encodeURIComponent(repo.name)}`;
+    const starLabel = `${repo.stargazers_count} star${repo.stargazers_count === 1 ? "" : "s"}`;
 
     return `
-      <article class="project-card pixel-panel">
-        <p class="project-index">WORLD_${String(index + 1).padStart(2, "0")}</p>
+      <article class="project-card">
+        <p class="project-index">Archive ${String(index + 1).padStart(2, "0")}</p>
         <a class="project-title-link" href="${detailUrl}">
           <h3>${escapeHtml(repo.name)}</h3>
         </a>
         <p class="project-description">${escapeHtml(description)}</p>
-        <p class="project-meta">${repo.stargazers_count} star${repo.stargazers_count === 1 ? "" : "s"} | Last update ${escapeHtml(updatedAt)}</p>
+        <p class="project-meta">${escapeHtml(starLabel)} · Updated ${escapeHtml(updatedAt)}</p>
         <div class="project-tag-row">
           ${createTag(language)}
-          <a class="project-detail-button" href="${detailUrl}">Detail Page</a>
+          <a class="project-detail-button" href="${detailUrl}">View details</a>
         </div>
       </article>
     `;
   });
 
   projectsGrid.innerHTML = cards.join("");
-  projectsStatus.textContent = "Project worlds sorted by stars from GitHub.";
+  projectsStatus.textContent = "Additional repositories, sorted by public signal and recent activity.";
 }
 
 async function loadProjects() {
@@ -218,6 +214,7 @@ async function loadProjects() {
       .filter((repo) => !repo.fork)
       .filter((repo) => !repo.archived)
       .filter((repo) => repo.name.toLowerCase() !== websiteRepo)
+      .filter((repo) => !featuredRepos.has(repo.name.toLowerCase()))
       .sort((leftRepo, rightRepo) => {
         if (rightRepo.stargazers_count !== leftRepo.stargazers_count) {
           return rightRepo.stargazers_count - leftRepo.stargazers_count;
@@ -229,7 +226,7 @@ async function loadProjects() {
 
     renderProjects(repos);
   } catch (error) {
-    projectsStatus.textContent = "Unable to load GitHub repositories right now.";
+    projectsStatus.textContent = "Unable to load the repository archive right now.";
   }
 }
 
@@ -247,7 +244,10 @@ async function loadPhotoGallery() {
 
     const data = await response.json();
     renderPhotoGallery(Array.isArray(data) ? data : []);
-  } catch (error) {}
+  } catch (error) {
+    photoTrackPrimary.innerHTML = "";
+    photoTrackSecondary.innerHTML = "";
+  }
 }
 
 async function loadProjectDetail() {
@@ -264,14 +264,14 @@ async function loadProjectDetail() {
   const readmeNode = document.getElementById("project-readme");
   const seedNode = document.getElementById("detail-seed");
   const languageNode = document.getElementById("detail-lang");
-  const starsNode = document.getElementById("detail-stars");
   const params = new URLSearchParams(window.location.search);
   const repoName = params.get("repo");
 
   if (!repoName) {
+    document.title = "Project not found | Chang (Sans) Xu";
     nameNode.textContent = "Project not found";
     descriptionNode.textContent = "No repository name was provided in the URL.";
-    readmeNode.textContent = "Add ?repo=repository-name to the URL to open a project world.";
+    readmeNode.textContent = "Add ?repo=repository-name to the URL to open a repository detail view.";
     return;
   }
 
@@ -286,9 +286,9 @@ async function loadProjectDetail() {
     const readmeResponse = await fetch(`https://api.github.com/repos/${githubUser}/${encodeURIComponent(repoName)}/readme`);
     const readmeData = readmeResponse.ok ? await readmeResponse.json() : null;
 
-    document.title = `${repo.name} | Project World`;
+    document.title = `${repo.name} | Chang (Sans) Xu`;
     nameNode.textContent = repo.name;
-    descriptionNode.textContent = repo.description || "No description yet. The README and repository history are the current map of this project world.";
+    descriptionNode.textContent = repo.description || "No repository description yet. Use the README and repository history for deeper context.";
     githubLinkNode.href = repo.html_url;
 
     if (repo.homepage) {
@@ -296,27 +296,27 @@ async function loadProjectDetail() {
       homeLinkNode.classList.remove("hidden-link");
     }
 
-    seedNode.textContent = `SEED: ${repo.id}`;
-    languageNode.textContent = `LANG: ${repo.language || "Unknown"}`;
-    starsNode.textContent = `STARS: ${repo.stargazers_count}`;
+    seedNode.textContent = `Repository #${repo.id}`;
+    languageNode.textContent = `Language: ${repo.language || "Unknown"}`;
 
     statsNode.innerHTML = [
       createStatRow("Visibility", repo.private ? "Private" : "Public"),
-      createStatRow("Primary Language", repo.language || "Unknown"),
-      createStatRow("Updated", formatDate(repo.pushed_at)),
-      createStatRow("Open Issues", String(repo.open_issues_count)),
-      createStatRow("Watchers", String(repo.watchers_count)),
-      createStatRow("Default Branch", repo.default_branch)
+      createStatRow("Primary language", repo.language || "Unknown"),
+      createStatRow("Last update", formatDate(repo.pushed_at)),
+      createStatRow("Stars", String(repo.stargazers_count)),
+      createStatRow("Open issues", String(repo.open_issues_count)),
+      createStatRow("Default branch", repo.default_branch)
     ].join("");
 
     if (readmeData && readmeData.content) {
-      readmeNode.textContent = decodeBase64Utf8(readmeData.content).slice(0, 6000);
+      readmeNode.textContent = decodeBase64Utf8(readmeData.content).slice(0, 8000);
     } else {
       readmeNode.textContent = "No README available for this repository yet.";
     }
   } catch (error) {
+    document.title = `${repoName} | Chang (Sans) Xu`;
     nameNode.textContent = repoName;
-    descriptionNode.textContent = "Unable to load this project world right now.";
+    descriptionNode.textContent = "Unable to load this repository right now.";
     readmeNode.textContent = "GitHub repository details could not be fetched.";
   }
 }
